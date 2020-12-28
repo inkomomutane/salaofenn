@@ -39,4 +39,13 @@ class Product extends Model
             'sub_category_id'
         );
     }
+    public function tags()
+    {
+      return $this->belongsToMany(
+            Tag::class,
+            'product_tag',
+            'product_id',
+            'tag_id',
+        )->using(ProductTag::class)->withTimestamps();
+    }
 }

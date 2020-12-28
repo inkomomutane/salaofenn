@@ -2,14 +2,12 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ServiceTag extends Pivot
+class ProductTag extends Pivot
 {
-    protected $fillable = [
-        'service_id',
+     protected $fillable = [
+        'product_id',
         'tag_id'
     ];
-  
 }

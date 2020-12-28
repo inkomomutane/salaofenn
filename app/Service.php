@@ -27,8 +27,8 @@ class Service extends Model
       return $this->belongsToMany(
             Tag::class,
             'service_tag',
-            'tag_id',
             'service_id',
+            'tag_id',
         )->using(ServiceTag::class)->withTimestamps();
     }
 }

@@ -17,8 +17,18 @@ class Tag extends Model
         return $this->belongsToMany(
             Service::class,
             'service_tag',
-            'service_id',
-            'tag_id'
+            'tag_id',
+            'service_id'
         )->using(ServiceTag::class)->withTimestamps();
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_tag',
+            'tag_id',
+            'product_id'
+        )->using(ProductTag::class)->withTimestamps();
     }
 }
