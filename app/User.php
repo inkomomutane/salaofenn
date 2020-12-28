@@ -45,4 +45,12 @@ class User extends Authenticatable
             'role_id'
         );
     }
+
+    public function orders()
+    {
+        return $this->hasMany(
+            Order::class,
+            'user_id'
+        );
+    }
 }

@@ -20,4 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('category', 'CategoryController')->middleware('auth:api');
 Route::resource('tag', 'TagController')->middleware('auth:api');
 Route::resource('subcategory', 'SubCategoryController')->middleware('auth:api');
+Route::resource('fornecedor', 'FornecedorController')->middleware('auth:api');
+Route::resource('order', 'OrderController')->middleware('auth:api');
+Route::resource('payment', 'PaymentController')->middleware('auth:api');
+Route::resource('product', 'ProductController')->middleware('auth:api');
+Route::resource('role', 'RoleController')->middleware('auth:api');
 Route::resource('service', 'ServiceController')->middleware('auth:api');
+Route::resource('status', 'StatusController')->middleware('auth:api');
