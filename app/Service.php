@@ -22,4 +22,12 @@ class Service extends Model
     {
         return $this->belongsTo(SubCategory::class,'sub_category_id');
     }
+    public function tags()
+    {
+      return $this->belongsTo(
+            'service_tag',
+            'tag_id',
+            'service_id',
+        )->using(ServiceTag::class)->withtimestamp();
+    }
 }
