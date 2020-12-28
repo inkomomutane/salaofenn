@@ -14,10 +14,11 @@ class Tag extends Model
 
     public function services()
     {
-        return $this->belongsTo(
+        return $this->belongsToMany(
+            Service::class,
             'service_tag',
             'service_id',
             'tag_id'
-        )->using(ServiceTag::class)->withtimestamp();
+        )->using(ServiceTag::class)->withTimestamps();
     }
 }

@@ -24,10 +24,11 @@ class Service extends Model
     }
     public function tags()
     {
-      return $this->belongsTo(
+      return $this->belongsToMany(
+            Tag::class,
             'service_tag',
             'tag_id',
             'service_id',
-        )->using(ServiceTag::class)->withtimestamp();
+        )->using(ServiceTag::class)->withTimestamps();
     }
 }
