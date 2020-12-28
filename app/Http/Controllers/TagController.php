@@ -14,7 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**
@@ -46,7 +46,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        return $tag->services;
     }
 
     /**

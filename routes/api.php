@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('category', 'CategoryController')->middleware('auth:api');
+Route::resource('tag', 'TagController')->middleware('auth:api');
+Route::resource('subcategory', 'SubCategoryController')->middleware('auth:api');
+Route::resource('service', 'ServiceController')->middleware('auth:api');

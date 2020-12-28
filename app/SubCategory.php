@@ -22,4 +22,12 @@ class SubCategory extends Model
         return $this->hasMany(Service::class,'sub_category_id');
     }
 
+    public function products()
+    {
+        return $this->hasMany(
+            Product::class,
+            'sub_category_id'
+        );
+    }
+
 }
