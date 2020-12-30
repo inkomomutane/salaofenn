@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\CreateOrder;
+use App\Http\Requests\Order\UpdateOrder;
 use App\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -14,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::with(['user','status','payment'])->get();
     }
 
     /**
@@ -24,16 +25,16 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Order\CreateOrder $createOrderRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrder $createOrderRequest)
     {
         //
     }
@@ -46,7 +47,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return Order::with(['user','status','payment'])->where('id',$order->id)->first();
     }
 
     /**
@@ -63,11 +64,11 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Order\UpdateOrder $updaterOrderRequest
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrder $updaterOrderRequest, Order $order)
     {
         //
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\CreateProduct;
+use App\Http\Requests\Product\UpdateProduct;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::with(['subcategory','fornecedor','tags'])->get();
     }
 
     /**
@@ -30,10 +32,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Product\CreateProduct $createProductRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProduct $createProductRequest)
     {
         //
     }
@@ -46,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return $product->with(['subcategory','fornecedor','tags'])->first();
     }
 
     /**
@@ -63,11 +65,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Product\UpdateProduct $updateProductRequest
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProduct $updateProductRequest, Product $product)
     {
         //
     }

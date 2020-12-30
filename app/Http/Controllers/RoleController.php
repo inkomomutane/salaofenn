@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Role\CreateRole;
+use App\Http\Requests\Role\UpdateRole;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return Role::with('users')->get();
+    }
+     public function Webindex()
+    {
+        return Role::with('users')->get();
     }
 
     /**
@@ -30,10 +36,10 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Role\CreateRole $createRolerequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRole $createRolerequest)
     {
         //
     }
@@ -46,7 +52,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return $role->with('users')->where('id',$role->id)->first();
     }
 
     /**
@@ -63,11 +69,11 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Role\UpdateRole $updateRolerequest
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(UpdateRole $updateRolerequest, Role $role)
     {
         //
     }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCategory\CreateSubCategory;
+use App\Http\Requests\SubCategory\UpdateSubCategory;
 use App\SubCategory;
-use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        return SubCategory::all();
+        return SubCategory::with(['category','products','services'])->get();
     }
 
     /**
@@ -30,10 +31,10 @@ class SubCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SubCategory\CreateSubCategory $createSubcategoryRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSubCategory $createSubcategoryRequest)
     {
         //
     }
@@ -46,7 +47,7 @@ class SubCategoryController extends Controller
      */
     public function show(SubCategory $subCategory)
     {
-        return $subCategory;
+        return $subCategory->with(['category','products','services'])->where('id',$subCategory->id)->first();
     }
 
     /**
@@ -63,11 +64,11 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SubCategory\UpdateSubCategory $updateSubCategoryRequest
      * @param  \App\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(UpdateSubCategory $updateSubCategoryRequest, SubCategory $subCategory)
     {
         //
     }

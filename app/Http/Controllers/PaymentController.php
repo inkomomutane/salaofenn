@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Payment\CreatePayment;
+use App\Http\Requests\Payment\UpdatePayment;
 use App\Payment;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        return Payment::with('orders')->get();
     }
 
     /**
@@ -30,10 +32,10 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Payment\CreatePayment $createPaymentRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePayment $createPaymentRequest)
     {
         //
     }
@@ -46,7 +48,7 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        return $payment->with('orders')->where('id',$payment->id)->first();
     }
 
     /**
@@ -63,11 +65,11 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Payment\UpdatePayment $updatePaymentRequest
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(UpdatePayment $updatePaymentRequest, Payment $payment)
     {
         //
     }

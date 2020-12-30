@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Service\CreateService;
+use App\Http\Requests\Service\UpdateService;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return Service::all();
+        return Service::with(['subcategory','tags'])->get();
     }
 
     /**
@@ -30,10 +32,10 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Service\CreateService $createServiceRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateService $createServiceRequest)
     {
         //
     }
@@ -46,7 +48,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return $service;
+        return $service->with(['subcategory','tags'])->first();
     }
 
     /**
@@ -63,11 +65,11 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Service\UpdateService $updateServiceRequest
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateService $updateServiceRequest, Service $service)
     {
         //
     }

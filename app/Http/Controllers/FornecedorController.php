@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fornecedor;
-use Illuminate\Http\Request;
+use App\Http\Requests\Fornecedor\CreateFornecedor;
+use App\Http\Requests\Fornecedor\UpdateFornecedor;
+
 
 class FornecedorController extends Controller
 {
@@ -14,7 +16,7 @@ class FornecedorController extends Controller
      */
     public function index()
     {
-        //
+        return Fornecedor::with('products')->get();
     }
 
     /**
@@ -30,10 +32,10 @@ class FornecedorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Fornecedor\CreateFornecedor  $createFornecedorRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFornecedor $createFornecedorRequest)
     {
         //
     }
@@ -46,7 +48,7 @@ class FornecedorController extends Controller
      */
     public function show(Fornecedor $fornecedor)
     {
-        //
+        return  $fornecedor->with('products')->where('id',$fornecedor->id)->first();
     }
 
     /**
@@ -63,11 +65,11 @@ class FornecedorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Fornecedor\UpdateFornecedor  $updateFornecedorRequest
      * @param  \App\Fornecedor  $fornecedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fornecedor $fornecedor)
+    public function update(UpdateFornecedor $updateFornecedorRequest, Fornecedor $fornecedor)
     {
         //
     }

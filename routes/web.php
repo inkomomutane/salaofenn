@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('developers','DevelopersController@index')->name('developers.index')->middleware('auth');
+Route::resource('role', 'RoleController');
+Route::get('/index','RoleController@Webindex');

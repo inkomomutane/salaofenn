@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tag\CreateTag;
+use App\Http\Requests\Tag\UpdateTag;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return Tag::all();
+        return Tag::with(['services','products'])->get();
     }
 
     /**
@@ -30,14 +32,14 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Tag\CreateTag $createTagRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTag $createTagRequest)
     {
         //
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -46,7 +48,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return $tag->services;
+        //return $tag;
+        return $tag->with(['services','products'])->where('id',$tag->id)->first();
     }
 
     /**
@@ -57,19 +60,19 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+    
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Tag\UpdateTag $updateTagRequest
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateTag $updateTagRequest, Tag $tag)
     {
-        //
+        
     }
 
     /**
@@ -80,6 +83,5 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
     }
 }
