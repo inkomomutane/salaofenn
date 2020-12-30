@@ -24,7 +24,6 @@ class UpdateProduct extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
             'sub_category_id' =>'required',
             'fornecedor_id' =>'required',
             'name' =>'required',

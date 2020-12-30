@@ -37,7 +37,14 @@ class ProductController extends Controller
      */
     public function store(CreateProduct $createProductRequest)
     {
-        //
+        try {
+                $created = Product::updateOrCreate(
+                    $createProductRequest->all()
+                );
+          return response()->json(['Product'=>$created,'message'=>'Product inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -71,7 +78,12 @@ class ProductController extends Controller
      */
     public function update(UpdateProduct $updateProductRequest, Product $product)
     {
-        //
+        try {
+            $product->update($updateProductRequest->all());
+                 return response()->json(['Product'=>$product,'message'=>'Product updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -82,6 +94,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+             $product->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

@@ -24,7 +24,6 @@ class UpdateService extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
             'name'=>'required',
             'sub_category_id'=>'required',
             'price'=>'required',

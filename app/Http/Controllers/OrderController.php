@@ -36,7 +36,14 @@ class OrderController extends Controller
      */
     public function store(CreateOrder $createOrderRequest)
     {
-        //
+        try {
+                $created = Order::updateOrCreate(
+                    $createOrderRequest->all()
+                );
+          return response()->json(['Order'=>$created,'message'=>'Order inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -70,7 +77,12 @@ class OrderController extends Controller
      */
     public function update(UpdateOrder $updaterOrderRequest, Order $order)
     {
-        //
+         try {
+            $order->update($updaterOrderRequest->all());
+                 return response()->json(['Order'=>$order,'message'=>'Order updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -81,6 +93,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+         try {
+             $order->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

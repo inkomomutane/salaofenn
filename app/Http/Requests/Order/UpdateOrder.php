@@ -24,7 +24,6 @@ class UpdateOrder extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
             'client_name' => 'required',
             'product_or_service_name'=>'required',
             'quantity'=>'required',

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Role\CreateRole;
 use App\Http\Requests\Role\UpdateRole;
 use App\Role;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -41,7 +40,14 @@ class RoleController extends Controller
      */
     public function store(CreateRole $createRolerequest)
     {
-        //
+         try {
+                $created = Role::updateOrCreate(
+                    $createRolerequest->all()
+                );
+          return response()->json(['Role'=>$created,'message'=>'Role inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -75,7 +81,12 @@ class RoleController extends Controller
      */
     public function update(UpdateRole $updateRolerequest, Role $role)
     {
-        //
+          try {
+            $role->update($updateRolerequest->all());
+                 return response()->json(['Role'=>$role,'message'=>'Role updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -86,6 +97,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+         try {
+             $role->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

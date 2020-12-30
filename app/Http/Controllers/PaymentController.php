@@ -37,7 +37,14 @@ class PaymentController extends Controller
      */
     public function store(CreatePayment $createPaymentRequest)
     {
-        //
+         try {
+                $created = Payment::updateOrCreate(
+                    $createPaymentRequest->all()
+                );
+          return response()->json(['Payment'=>$created,'message'=>'Payment inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -71,7 +78,12 @@ class PaymentController extends Controller
      */
     public function update(UpdatePayment $updatePaymentRequest, Payment $payment)
     {
-        //
+         try {
+            $payment->update($updatePaymentRequest->all());
+                 return response()->json(['Payment'=>$payment,'message'=>'Payment updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -82,6 +94,11 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        try {
+             $payment->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

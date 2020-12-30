@@ -26,7 +26,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+         
     }
 
     /**
@@ -37,7 +37,14 @@ class StatusController extends Controller
      */
     public function store(CreateStatus $createStatusRequest)
     {
-        //
+         try {
+                $created = Status::updateOrCreate(
+                    $createStatusRequest->all()
+                );
+          return response()->json(['Status'=>$created,'message'=>'Status inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -71,7 +78,12 @@ class StatusController extends Controller
      */
     public function update(UpdateStatus $updateStatusRequest, Status $status)
     {
-        //
+        try {
+            $status->update($updateStatusRequest->all());
+                 return response()->json(['Status'=>$status,'message'=>'Status updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -82,6 +94,11 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        //
+        try {
+             $status->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

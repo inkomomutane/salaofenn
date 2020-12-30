@@ -37,7 +37,14 @@ class ServiceController extends Controller
      */
     public function store(CreateService $createServiceRequest)
     {
-        //
+        try {
+                $created = Service::updateOrCreate(
+                    $createServiceRequest->all()
+                );
+          return response()->json(['Service'=>$created,'message'=>'Service inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -71,7 +78,12 @@ class ServiceController extends Controller
      */
     public function update(UpdateService $updateServiceRequest, Service $service)
     {
-        //
+        try {
+            $service->update($updateServiceRequest->all());
+                 return response()->json(['Service'=>$service,'message'=>'Service updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -82,6 +94,11 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        try {
+             $service->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

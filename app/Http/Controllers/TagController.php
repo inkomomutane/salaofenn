@@ -37,7 +37,14 @@ class TagController extends Controller
      */
     public function store(CreateTag $createTagRequest)
     {
-        //
+        try {
+                $created = Tag::updateOrCreate(
+                    $createTagRequest->all()
+                );
+          return response()->json(['Tag'=>$created,'message'=>'Tag inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
     
     /**
@@ -72,7 +79,12 @@ class TagController extends Controller
      */
     public function update(UpdateTag $updateTagRequest, Tag $tag)
     {
-        
+        try {
+            $tag->update($updateTagRequest->all());
+                 return response()->json(['Tag'=>$tag,'message'=>'Tag updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -83,5 +95,11 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+         try {
+             $tag->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }

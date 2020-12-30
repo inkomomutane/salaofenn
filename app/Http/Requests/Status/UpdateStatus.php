@@ -24,7 +24,6 @@ class UpdateStatus extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
             'name' => 'required|max:191|unique:statuses'
         ];
     }

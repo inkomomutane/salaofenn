@@ -24,7 +24,6 @@ class UpdatePayment extends FormRequest
     public function rules()
     {
         return [
-            'id' =>'required',
             'name' =>'required|unique:payments'
         ];
     }

@@ -36,16 +36,16 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\Category\CreateCategory $createCategoryRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $createCategoryRequests)
+    public function store(CreateCategory $createCategoryRequest)
     {
-        $rules = [
-         'name' => 'required|unique:categories'   
-        ];
-
-       $validator = Validator::make($createCategoryRequests->all(),$rules);
-       if($validator->fails()){
-           return response()->json($validator->errors(),400);
-       }
+        try {
+                $created = Category::updateOrCreate(
+                    $createCategoryRequest->all()
+                );
+          return response()->json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>$th],404);
+        }
     }
 
     /**
@@ -79,7 +79,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategory $updateCategoryRequest, Category $category)
     {
-        //
+        try {
+            $category->update($updateCategoryRequest->all());
+                 return response()->json(['Category'=>$category,'message'=>'Category updated successful','status'=>201],201);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+        }
     }
 
     /**
@@ -90,6 +95,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+             $category->delete();
+              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        } catch (\Throwable $th) {
+              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+        }
     }
 }
