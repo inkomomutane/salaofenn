@@ -13,7 +13,7 @@ class UpdateService extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdateService extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'required',
+            'name'=>'required',
+            'sub_category_id'=>'required',
+            'price'=>'required',
+            'promotion'=>'required',
+            'published_at'=>'required'
         ];
     }
 }

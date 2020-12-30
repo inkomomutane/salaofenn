@@ -6,14 +6,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateStatus extends FormRequest
 {
-    /**
+       /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateStatus extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'required',
+            'name' => 'required|max:191|unique:statuses'
         ];
     }
 }

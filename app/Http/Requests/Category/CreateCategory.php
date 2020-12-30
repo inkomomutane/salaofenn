@@ -24,18 +24,7 @@ class CreateCategory extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required|max:191|unique:categories'
         ];
     }
-        /**
-         * Get the error messages for the defined validation rules.
-         *
-         * @return array
-         */
-        public function messages()
-        {
-            return [
-                'name.required' => 'A title is required',
-            ];
-        }
 }

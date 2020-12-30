@@ -13,7 +13,7 @@ class CreateFornecedor extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class CreateFornecedor extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:191',
+            'contact' => 'required',
+            'email'=> 'email'
         ];
     }
 }

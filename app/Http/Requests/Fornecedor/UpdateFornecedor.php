@@ -13,7 +13,7 @@ class UpdateFornecedor extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateFornecedor extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id'=>'required',
+            'name' => 'required|max:191',
+            'contact' => 'required',
+            'email'=> 'email'
         ];
     }
 }
