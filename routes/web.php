@@ -13,13 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','HomePageController@index');
+Route::get('/details/{product}','ProductController@Webshow')->name('product_detail');
+Route::get('/cart', function () {
+    return view('frontend.cart');
 });
 
-Auth::routes();
+Route::get('/search', function () {
+    return view('frontend.search-product');
+});
+Route::resource('category', 'CategoryController');
+Route::resource('tag', 'TagController')->middleware('auth:api');
+Route::resource('subcategory', 'SubCategoryController');
+Route::resource('fornecedor', 'FornecedorController');
+Route::resource('order', 'OrderController');
+Route::resource('payment', 'PaymentController');
+Route::resource('product', 'ProductController');
+Route::resource('role', 'RoleController');
+Route::resource('service', 'ServiceController');
+Route::resource('status', 'StatusController');
 
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('developers','DevelopersController@index')->name('developers.index')->middleware('auth');
-Route::resource('role', 'RoleController');
 Route::get('/index','RoleController@Webindex');

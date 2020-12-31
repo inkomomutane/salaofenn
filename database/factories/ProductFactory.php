@@ -6,11 +6,14 @@ use App\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
+    
+$fake = \Faker\Factory::create();
+$fake->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
     return [
         'name' => $faker->name,
         'description'=>$faker->word,
-        'image' => $faker->imageUrl(),
-        'video'=>$faker->imageUrl(),
+        'image' => $fake->imageUrl(),
+        'video'=>$fake->imageUrl(),
         'price'=>$faker->numberBetween(50,345),
         'sellable'=>$faker->boolean,
         'published_at'=>$faker->dateTime(),

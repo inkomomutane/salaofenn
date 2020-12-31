@@ -57,6 +57,19 @@ class ProductController extends Controller
     {
         return $product->with(['subcategory','fornecedor','tags'])->first();
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function Webshow(Product $product)
+    {
+        //dd($product);
+        
+        return view('frontend.product-detail',['product'=>$product->with(['subcategory','fornecedor','tags'])->where('id',$product->id)->first()]);
+    }
+    
 
     /**
      * Show the form for editing the specified resource.

@@ -15,7 +15,8 @@
         "laravel/framework": "^7.0",
         "laravel/passport": "~9.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "2.4"
+        "laravel/ui": "2.4",
+        "xvladqt/faker-lorem-flickr": "9999999-dev"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

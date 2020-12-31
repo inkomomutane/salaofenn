@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Role\CreateRole;
 use App\Http\Requests\Role\UpdateRole;
 use App\Role;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -17,8 +18,9 @@ class RoleController extends Controller
     {
         return Role::with('users')->get();
     }
-     public function Webindex()
+     public function Webindex(Request $req)
     {
+    
         return Role::with('users')->get();
     }
 
