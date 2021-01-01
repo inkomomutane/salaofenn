@@ -83,7 +83,7 @@
 
 				<ul class="list-unstyled list-lg">
 					@foreach ($categories->slice(0,8) as  $category)
-						<li><a href="#">{{ $category->name}} <span class="float-right badge badge-light round">{{ $category->products->count() + $category->services->count() }}</span> </a></li>
+						<li><a href="#">{{ $category->name}} <span class="float-right badge badge-light round">{{ $category->products->count()}}</span> </a></li>
 					@endforeach
 				</ul>  
 			</div> <!-- card-body.// -->
@@ -126,7 +126,7 @@
 				<label class="form-check">
 				  <input class="form-check-input" value="" type="checkbox">
 				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">{{ $tag->products->count() + $tag->services->count() }} </span>
+				  	<span class="float-right badge badge-light round">{{ $tag->products->count() }} </span>
 					 {{ $tag->name }}
 				  </span>
 				</label>  <!-- form-check.// -->
@@ -140,7 +140,7 @@
 
 	</aside> <!-- col.// -->
 	<main class="col-sm-9">
-		@foreach ($categories->first()->services->slice(0,3) as $product )
+		@foreach ($categories->random()->products->slice(0,3) as $product )
 			<article class="card card-product">
 			<div class="card-body">
 			<div class="row">
@@ -149,7 +149,7 @@
 				</aside> <!-- col.// -->
 				<article class="col-sm-6">
 						<h4 class="title"> {{ $product->name }}  </h4>
-						<p> {{ $product->description }}</p>
+						<p> {{ $product->short_description }}</p>
 						<dl class="dlist-align">
 						<dt>Categoria</dt>
 						<dd >
@@ -203,13 +203,13 @@
 		<h4 class="title-text">{{$category->name}}</h4>
 		<!-- ============== owl slide items  ============= -->
 		<div class="owl-carousel owl-init slide-items" data-items="5" data-margin="20" data-dots="true" data-nav="true">
-				@foreach($category->services as $service )
+				@foreach($category->products as $product )
 					<div class="item-slide">
 						<figure class="card card-product">
-							<span class="badge-offer"><b> - {{$service->promotion}}%</b></span>
+							<span class="badge-offer"><b> - {{$product->promotion}}%</b></span>
 							<div class="img-wrap"> <img src="images/items/1.jpg"> <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
 							<figcaption class="info-wrap text-center">
-								<h6 class="title text-truncate"><a href="#">{{$service->name}}</a></h6>
+								<h6 class="title text-truncate"><a href="#">{{$product->name}}</a></h6>
 							</figcaption>
 							<div class="bottom-wrap">
 								<a href="" class="btn btn-sm btn-primary float-right ">Comprar</a>	
@@ -232,7 +232,7 @@
 <section class="section-content padding-y bg">
 	<div class = "container">	
 		<div class="mr-0">
-		{{$cats->onEachSide(1)->links()}}
+		{{$cats->links()}}
 		</div>
 	</div>
 </section>

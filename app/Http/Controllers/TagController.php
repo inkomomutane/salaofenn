@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return Tag::with(['services','products'])->get();
+        return Tag::with(['products'])->get();
     }
 
     /**
@@ -56,7 +56,7 @@ class TagController extends Controller
     public function show(Tag $tag)
     {
         //return $tag;
-        return $tag->with(['services','products'])->where('id',$tag->id)->first();
+        return $tag->with(['products'])->where('id',$tag->id)->first();
     }
 
     /**

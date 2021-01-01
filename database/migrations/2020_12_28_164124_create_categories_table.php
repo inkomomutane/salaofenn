@@ -28,9 +28,10 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
         Schema::table('categories', function (Blueprint $table) {
-        $table->dropSoftDeletes();
-    });
+            $table->dropSoftDeletes();
+        });
+        Schema::dropIfExists('categories');
+        
     }
 }

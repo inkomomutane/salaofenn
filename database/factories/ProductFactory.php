@@ -10,8 +10,10 @@ $factory->define(Product::class, function (Faker $faker) {
 $fake = \Faker\Factory::create();
 $fake->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
     return [
+        'is_service'=>$faker->boolean,
         'name' => $faker->name,
-        'description'=>$faker->word,
+        'short_description'=>$faker->text(200),
+        'description'=>$faker->text(3000),
         'image' => $fake->imageUrl(),
         'video'=>$fake->imageUrl(),
         'price'=>$faker->numberBetween(50,345),

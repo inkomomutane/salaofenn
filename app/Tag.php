@@ -12,15 +12,7 @@ class Tag extends Model
         'name'
     ];
 
-    public function services()
-    {
-        return $this->belongsToMany(
-            Service::class,
-            'service_tag',
-            'tag_id',
-            'service_id'
-        )->using(ServiceTag::class)->withTimestamps();
-    }
+  
 
     public function products()
     {

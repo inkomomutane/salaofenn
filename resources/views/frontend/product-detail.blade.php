@@ -59,7 +59,7 @@
 </div> <!-- price-detail-wrap .// -->
 <dl>
   <dt>Description</dt>
-  <dd><p>{{ $product->description}}</p></dd>
+  <dd><p>{{ $product->short_description}}</p></dd>
 </dl>
 
 <hr>

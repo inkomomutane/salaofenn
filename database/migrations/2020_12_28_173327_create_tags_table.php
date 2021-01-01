@@ -29,9 +29,10 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
         Schema::table('tags', function (Blueprint $table) {
-          $table->dropSoftDeletes();
-    });
+                $table->dropSoftDeletes();
+            });
+        Schema::dropIfExists('tags');
+            
     }
 }

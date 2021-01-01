@@ -17,7 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('sub_category_id');
             $table->foreignId('fornecedor_id');
+            $table->boolean('is_service');
             $table->string('name');
+            $table->text('short_description');
             $table->text('description');
             $table->text('image');
             $table->text('video');

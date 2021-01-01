@@ -14,8 +14,8 @@ class HomePageController extends Controller
      */
     public function index()
     {
-        $subcatrogories =  SubCategory::with(['products','services'])->get();
-        $catrogories =  SubCategory::with(['products','services'])->paginate(3);
+        $subcatrogories =  SubCategory::with(['products'])->get();
+        $catrogories =  SubCategory::with(['products'])->paginate(3);
         return view('frontend.welcome')->with(['categories'=>$subcatrogories,'cats'=>$catrogories]);
     }
 
