@@ -82,8 +82,13 @@
 				</form>
 
 				<ul class="list-unstyled list-lg">
-					@foreach ($categories->slice(0,8) as  $category)
-						<li><a href="#">{{ $category->name}} <span class="float-right badge badge-light round">{{ $category->products->count()}}</span> </a></li>
+					<li><a href="#">Todos<span class="float-right badge badge-light round">
+								{{ App\Product::count() }}
+						</span> </a></li>
+					@foreach (App\Category::all() as  $category)
+						<li><a href="#">{{ $category->name}} <span class="float-right badge badge-light round">
+								{{ App\Product::whereIn('sub_category_id',App\SubCategory::where('category_id',$category->id)->get('id'))->count() }}
+						</span> </a></li>
 					@endforeach
 				</ul>  
 			</div> <!-- card-body.// -->
@@ -168,19 +173,57 @@
 				<aside class="col-sm-3 border-left">
 					<div class="action-wrap">
 						<div class="price-wrap h4">
-							<span class="price"><small>Price: </small>  ${{ $product->price - (($product->price * $product->promotion)/100)  }} </span>	
-							<del class="price-old"> ${{ $product->price }}</del>
+							<span class="price"><small><code style="color: black">Preco:</code> <code style="color: green"> <b>${{ $product->price - (($product->price * $product->promotion)/100)  }}</code></b> </span>	
+							<del class="price-old" style="color: red"> <code>${{ $product->price }}</code></del></small> 
 						</div> <!-- info-price-detail // -->
 
-						<br>
-						<p>
-							<a href="#" class="btn btn-primary"> Buy now</a>
-							<a href="{{ route('product_detail',$product->id) }}" class="btn btn-secondary"> Details  </a>
+						@if ($product->subCategory->category->id ==1)
+								
+							<p>
+								<a href="#" class="btn btn-success">
+									<i class="fa fa-money-bill-alt"></i>
+									Comprar agora
+								</a>
+							</p>
+							<p>
+								<a href="#" class="btn btn-primary">
+									<i class="fa fa-shopping-cart"></i>
+									+ a Carrinha
+								</a>
+							</p>
+							<p>
+								<a href="{{ route('product_detail',$product->id) }}" class="btn btn-warning">
+									<i class="fa fa-eye"></i>
+									Ver detalhes
+								</a>
+							</p>
+							<p>
+								<a href="#" class="btn btn-danger">
+									<i class="fa fa-heart"></i>
+									+ a Favoritos
+								</a>
+							</p>
+							@else
+								<p>
+							<a href="#" class="btn btn-success">
+								<i class="fa fa-clock "></i>
+								Agendar agora
+							</a>
 						</p>
 						<p>
-							<a href="#" class="btn btn-primary">Add Cart</a>
-							<a href="#" class="btn btn-secondary">Add <3 </a>
+							<a href="{{ route('product_detail',$product->id) }}" class="btn btn-warning">
+								<i class="fa fa-eye"></i>
+								 Ver detalhes
+							</a>
 						</p>
+						<p>
+							<a href="#" class="btn btn-danger">
+								<i class="fa fa-heart"></i>
+								+ a Favoritos
+							</a>
+						</p>
+							
+						@endif
 					</div> <!-- action-wrap.// -->
 				</aside> <!-- col.// -->
 			</div> <!-- row.// -->
