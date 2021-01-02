@@ -43,7 +43,20 @@
 				<div class="aside"><div class="img-wrap border-right"><img src="images/items/1.jpg"></div></div>
 				<figcaption class="text-wrap align-self-center">
 					<h6 class="title">{{ $category->name }}</h6>
-					<a href="#">More items</a>
+					<dl class="dlist-align">
+						<dt>Categoria</dt>
+						<dd >
+							<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
+								<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">{{ $category->category->name }}</a></li>
+							</ol>
+						</dd>
+						</dl> 
+						 <!-- item-property-hor .// -->
+						 <a href="#">
+							<li class="list-unstyled active_category">
+								Ver mais Itens
+							</li>
+						</a>
 				</figcaption>
 			</figure>
 			</div> <!-- card.// -->
@@ -67,28 +80,25 @@
 		<header class="card-header">
 			<a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#collapse22">
 				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">By Category</h6>
+				<h6 class="title">Filtrar por Categoria</h6>
 			</a>
 		</header>
 		<div style="" class="filter-content collapse show" id="collapse22">
 			<div class="card-body">
-				<form class="pb-3">
-				<div class="input-group">
-				  <input class="form-control" placeholder="Search" type="text">
-				  <div class="input-group-append">
-				    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-				  </div>
-				</div>
-				</form>
-
 				<ul class="list-unstyled list-lg">
-					<li><a href="#">Todos<span class="float-right badge badge-light round">
-								{{ App\Product::count() }}
-						</span> </a></li>
+					<a href="#">
+						<li  class="active_category">Todas<span class="float-right badge badge-light round">
+									{{ App\Product::count() }}
+							</span>
+						</li>
+					</a>
 					@foreach (App\Category::all() as  $category)
-						<li><a href="#">{{ $category->name}} <span class="float-right badge badge-light round">
+					<a href="#">
+						<li>{{ $category->name}} <span class="float-right badge badge-light round">
 								{{ App\Product::whereIn('sub_category_id',App\SubCategory::where('category_id',$category->id)->get('id'))->count() }}
-						</span> </a></li>
+							</span>
+						</li>
+					 </a>
 					@endforeach
 				</ul>  
 			</div> <!-- card-body.// -->
@@ -98,36 +108,36 @@
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse33">
 				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">By Price  </h6>
+				<h6 class="title">Por Preço</h6>
 			</a>
 		</header>
 		<div class="filter-content collapse show" id="collapse33">
 			<div class="card-body">
 				<div class="form-row">
 				<div class="form-group col-md-6">
-				  <label>Min</label>
+				  <label>Mínimo</label>
 				  <input class="form-control" placeholder="$0" type="number">
 				</div>
 				<div class="form-group text-right col-md-6">
-				  <label>Max</label>
+				  <label>Maximo</label>
 				  <input class="form-control" placeholder="$1,0000" type="number">
 				</div>
 				</div> <!-- form-row.// -->
-				<button class="btn btn-block btn-outline-primary">Apply</button>
 			</div> <!-- card-body.// -->
+			<button class="btn btn-block btn-outline-primary">Filtrar</button>
 		</div> <!-- collapse .// -->
 	</article> <!-- card-group-item.// -->
 	<article class="card-group-item">
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse44">
 				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">By Tags </h6>
+				<h6 class="title">Por tags</h6>
 			</a>
 		</header>
 		<div class="filter-content collapse show" id="collapse44">
 			<div class="card-body">
 			<form>
-				@foreach (\App\Tag::all()->slice(0,5) as $tag )
+				@foreach (\App\Tag::all()->random(5) as $tag )
 				<label class="form-check">
 				  <input class="form-check-input" value="" type="checkbox">
 				  <span class="form-check-label">
@@ -139,13 +149,14 @@
 			</form>
 			</div> <!-- card-body.// -->
 		</div> <!-- collapse .// -->
+		<button class="btn btn-block btn-outline-primary">Filtrar</button>
 	</article> <!-- card-group-item.// -->
 </div> <!-- card.// -->
 
 
 	</aside> <!-- col.// -->
 	<main class="col-sm-9">
-		@foreach ($categories->random()->products->slice(0,3) as $product )
+		@foreach ($categories->first()->products->slice(0,3) as $product )
 			<article class="card card-product">
 			<div class="card-body">
 			<div class="row">
@@ -250,17 +261,45 @@
 					<div class="item-slide">
 						<figure class="card card-product">
 							<span class="badge-offer"><b> - {{$product->promotion}}%</b></span>
-							<div class="img-wrap"> <img src="images/items/1.jpg"> <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
+							<div class="img-wrap"> <a href="{{ asset('/') }}images/items/1.jpg" data-fancybox="" class="item-gallery"><img src=" {{ asset('/') }}images/items/1.jpg"></a><a class="btn-overlay" href="{{ route('product_detail', ['product'=>$product->id]) }}"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
 							<figcaption class="info-wrap text-center">
-								<h6 class="title text-truncate"><a href="#">{{$product->name}}</a></h6>
+								<h6 class="title text-truncate"><a href="{{ route('product_detail', ['product'=>$product->id]) }}">{{$product->name}}</a></h6>
+								<dl class="dlist-align">
+								<dt>Categoria</dt>
+								<dd >
+									<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
+										<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">{{ $product->subcategory->category->name }}</a></li>
+									</ol>
+								</dd>
+								</dl> 
 							</figcaption>
+
+				
+
+
 							<div class="bottom-wrap">
-								<a href="" class="btn btn-sm btn-primary float-right ">Comprar</a>	
-								<a href = ""  class = "btn btn-sm btn-warning float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
-								<div class="price-wrap h5">
-									<span class="price-new">${{ $product->price - (($product->price * $product->promotion)/100)  }}</span> <del class="price-old">${{$product->price }}</del>
+								@if ($product->subcategory->category->id == 1)
+									
+								
+								<a href="" class="btn btn-sm btn-success float-right ">
+									<i class="fa fa-money-bill-alt"></i>
+									Comprar 
+								</a>	
+								<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
+								<br><br>
+									@else
+									<a href="" class="btn btn-sm btn-success float-right ">
+									<i class="fa fa-clock"></i>
+									Agendar
+								</a>	
+								<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+								@endif
+								<div class="price-wrap h5" style="font-weight:bold; font-size:15px">
+									<span class="price-new my-2" style="color: green; ">${{ $product->price - (($product->price * $product->promotion)/100)  }}</span> <del class="price-old float-right " style="color: red">${{$product->price }}</del>
 								</div> <!-- price-wrap.// -->
-							</div> <!-- bottom-wrap.// -->
+
+							</div>
+							 <!-- bottom-wrap.// -->
 						</figure>
 						<!-- card // -->
 					</div>

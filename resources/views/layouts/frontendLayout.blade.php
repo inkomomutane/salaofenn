@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
 
-<title>UI KIT - Marketplace and Ecommerce html template</title>
+<title>{{ config('app.name','Fenn\'sLook') }}</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
 
 <!-- jQuery -->
 <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
@@ -76,20 +76,14 @@ $(document).ready(function() {
 	<div class="container">
 <div class="row align-items-center sticky-top">
 	<div class="col-lg-3 col-sm-4">
-	<div class="brand-wrap">
-		<img class="logo" src="{{ asset('images/logo-dark.png') }}">
-		<h2 class="logo-text">LOGO</h2>
-	</div> <!-- brand-wrap.// -->
+	<a href="{{ url('/') }}" class="brand-wrap">
+		<img class="logo" src="{{ asset('images/logos1.jpg') }}">
+	</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-4 col-xl-5 col-sm-8">
 			<form action="#" class="search-wrap">
 				<div class="input-group w-100">
 				    <input type="text" class="form-control" style="width:55%;" placeholder="Search">
-				    <select class="custom-select"  name="category_name">
-							<option value="">All type</option><option value="codex">Special</option>
-							<option value="comments">Only best</option>
-							<option value="content">Latest</option>
-					</select>
 				    <div class="input-group-append">
 				      <button class="btn btn-primary" type="submit">
 				        <i class="fa fa-search"></i>
