@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
+     
     protected $fillable = [
         'is_service',
         'short_description',
@@ -50,4 +51,5 @@ class Product extends Model
             'tag_id',
         )->using(ProductTag::class)->withTimestamps();
     }
+
 }

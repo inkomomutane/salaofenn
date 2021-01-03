@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+<meta name="author" content="Fenn LCC">
 
 <title>{{ config('app.name','Fenn\'sLook') }}</title>
 
@@ -35,6 +35,8 @@
 <!-- custom javascript -->
 <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 
+@stack('css')
+
 <script type="text/javascript">
 /// some script
 
@@ -45,6 +47,8 @@ $(document).ready(function() {
 }); 
 // jquery end
 </script>
+
+@stack('js')
 
 </head>
 <body>

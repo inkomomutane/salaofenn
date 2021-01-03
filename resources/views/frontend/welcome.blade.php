@@ -290,9 +290,11 @@
 									@else
 									<a href="" class="btn btn-sm btn-success float-right ">
 									<i class="fa fa-clock"></i>
+									
 									Agendar
 								</a>	
 								<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+								<br><br>
 								@endif
 								<div class="price-wrap h5" style="font-weight:bold; font-size:15px">
 									<span class="price-new my-2" style="color: green; ">${{ $product->price - (($product->price * $product->promotion)/100)  }}</span> <del class="price-old float-right " style="color: red">${{$product->price }}</del>
@@ -314,7 +316,7 @@
 <section class="section-content padding-y bg">
 	<div class = "container">	
 		<div class="mr-0">
-		{{$cats->links()}}
+		{{$cats->onEachSide(1)->links()}}
 		</div>
 	</div>
 </section>

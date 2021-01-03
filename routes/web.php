@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,8 @@ Route::get('/cart', function () {
     return view('frontend.cart');
 });
 
-Route::get('/search', function () {
-    return view('frontend.search-product');
-});
+Route::any('/filter','ProductController@SearchProduct')->name('filter');
+
 Route::resource('category', 'CategoryController');
 Route::resource('tag', 'TagController')->middleware('auth:api');
 Route::resource('subcategory', 'SubCategoryController');

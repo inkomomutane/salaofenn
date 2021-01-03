@@ -1,16 +1,21 @@
 @extends('layouts.frontendLayout')
 
 @section('content')
-    
+@push('css')
+	
+	<link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}" type="text/css"/>
+@endpush
+
+
 <section class="section-pagetop bg-secondary">
 <div class="container clearfix">
 	<h2 class="title-page">Page heading</h2>
 
 	<nav class="float-left">
 	<ol class="breadcrumb  bg-white px-3 py-1">
-	    <li class="breadcrumb-item"><a href="#">Home</a></li>
-	    <li class="breadcrumb-item"><a href="#">Library</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Data</li>
+	    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+	    <li class="breadcrumb-item"><a href="#">Filtros</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Todos(Produtos e serviços)</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -23,79 +28,43 @@
 <div class="card">
 	<div class="card-body">
 <div class="row">
-	<div class="col-md-3-24"> <strong>Your are here:</strong> </div> <!-- col.// -->
-	<nav class="col-md-18-24"> 
-	<ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a href="#">Home</a></li>
-	    <li class="breadcrumb-item"><a href="#">Category name</a></li>
-	    <li class="breadcrumb-item"><a href="#">Sub category</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Items</li>
-	</ol>  
-	</nav> <!-- col.// -->
-	<div class="col-md-3-24 text-right"> 
-	 <a href="#" data-toggle="tooltip" title="List view"> <i class="fa fa-bars"></i></a>
-	 <a href="#" data-toggle="tooltip" title="Grid view"> <i class="fa fa-th"></i></a>
-	</div> <!-- col.// -->
+	<!-- col.// -->
+	
 </div> <!-- row.// -->
 <hr>
 <div class="row">
-	<div class="col-md-3-24"> <strong>Filter by:</strong> </div> <!-- col.// -->
+	<div class="col-md-3-24"> <strong>Filtrar:</strong></div> <!-- col.// -->
 	<div class="col-md-21-24"> 
+		<form method="post" action="{{ route('filter') }}" id="xxpf">
+			@csrf
+			
 		<ul class="list-inline">
-		  <li class="list-inline-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
-            <div class="dropdown-menu p-3" style="max-width:400px;"">	
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> Good supplier
-			    </a>
-		      </label>
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> Best supplier
-			    </a>
-		      </label>
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> New supplier
-			    </a>
-		      </label>
-            </div> <!-- dropdown-menu.// -->
-	      </li>
-	      <li class="list-inline-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">  Country </a>
-            <div class="dropdown-menu p-3" style="max-width:400px;"">	
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> China
-			    </a>
-		      </label>
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> Japan
-			    </a>
-		      </label>
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> Uzbekistan
-			    </a>
-		      </label>
-		      <label class="form-check">
-		      	<a href="#">
-		      	 <input type="checkbox" class="form-check-input"> Russia
-			    </a>
-		      </label>
-            </div> <!-- dropdown-menu.// -->
-	      </li>
-		  <li class="list-inline-item"><a href="#">Product type</a></li>
-		  <li class="list-inline-item"><a href="#">Brand name</a></li>
-		  <li class="list-inline-item"><a href="#">Color</a></li>
-		  <li class="list-inline-item"><a href="#">Size</a></li>
+		   <li class="list-inline-item">
+		  		<label class="mr-2">Por categorias</label>
+				<select id="example-getting-started2" multiple="multiple" name ="subcategories[]" class="list-inline-item dropdown" value="0">
+					@foreach (App\SubCategory::all() as $item)
+						<option value="{{ $item->id }}" >{{ $item->name }}</option>
+					@endforeach
+				</select>
+		  </li>
+		  <li class="list-inline-item">
+		  		<label class="mr-2">Por tags</label>
+				<select id="example-getting-started3" multiple="multiple" name ="tags[]" class="form-control form-control-sm">
+					@foreach (App\Tag::all() as $item)
+						<option value="{{ $item->id }}" >{{ $item->name }}</option>
+					@endforeach
+				</select>
+		  </li>
+
 		  <li class="list-inline-item">
 		  	<div class="form-inline">
-		  		<label class="mr-2">Price</label>
-				<input class="form-control form-control-sm" placeholder="Min" type="number">
+		  		<label class="mr-2">Por Preço</label>
+				<input class="form-control form-control-sm" name= 'minPrice' placeholder="Min" type="number">
 					<span class="px-2"> - </span>
-				<input class="form-control form-control-sm" placeholder="Max" type="number">
-				<button type="submit" class="btn btn-sm ml-2">Ok</button>
+				<input class="form-control form-control-sm" name='maxPrice' placeholder="Max" type="number">
+				<input type="submit" class="btn btn-sm ml-2" value="Ok" id="xf"></input>
+			  </form>
+			  <a class = "btn  btn-success btn-sm ml-2" href = "{{ route('filter') }}"><i class="fa fa-sync" ></i> Remover filtro</a>
 			</div>
 		  </li>
 		</ul>
@@ -104,151 +73,97 @@
 	</div> <!-- card-body .// -->
 </div> <!-- card.// -->
 
+
 <div class="padding-y-sm">
-<span>3897 results for "Item"</span>	
+<span> {{ $products->total() }} resultados encontrados.</span>	
 </div>
 
-<div class="row-sm">
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/1.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">Good item name</a>
-			<div class="price-wrap">
-				<span class="price-new">$1280</span>
-				<del class="price-old">$1980</del>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/2.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/3.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">Good item name</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/4.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">Good item name</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/5.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">Good item name</a>
-			<div class="price-wrap">
-				<span class="price-new">$1280</span>
-				<del class="price-old">$1980</del>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/6.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/7.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/1.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/2.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$1280</span>
-				<del class="price-old">$1980</del>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/3.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/4.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
-<div class="col-md-3 col-sm-6">
-	<figure class="card card-product">
-		<div class="img-wrap"> <img src="images/items/6.jpg"></div>
-		<figcaption class="info-wrap">
-			<a href="#" class="title">The name of product</a>
-			<div class="price-wrap">
-				<span class="price-new">$280</span>
-			</div> <!-- price-wrap.// -->
-		</figcaption>
-	</figure> <!-- card // -->
-</div> <!-- col // -->
+<div class="row-sm py-2">
+@foreach ($products as $product)
+	<div class="col-md-3 col-sm-6">
+			<figure class="card card-product">
+							<span class="badge-offer"><b> - {{$product->promotion}}%</b></span>
+							<div class="img-wrap"> <a href="{{ asset('/') }}images/items/1.jpg" data-fancybox="" class="item-gallery"><img src=" {{ asset('/') }}images/items/1.jpg"></a><a class="btn-overlay" href="{{ route('product_detail', ['product'=>$product->id]) }}"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
+							<figcaption class="info-wrap text-center">
+								<h6 class="title text-truncate"><a href="{{ route('product_detail', ['product'=>$product->id]) }}">{{$product->name}}</a></h6>
+								<dl class="dlist-align">
+								<dt>Categoria</dt>
+								<dd >
+									<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
+										<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">{{ $product->subcategory->category->name }}</a></li>
+									</ol>
+								</dd>
+								</dl> 
+							</figcaption>
+
+				
+
+
+							<div class="bottom-wrap">
+								@if ($product->subcategory->category->id == 1)
+									
+								
+								<a href="" class="btn btn-sm btn-success float-right ">
+									<i class="fa fa-money-bill-alt"></i>
+									Comprar 
+								</a>	
+								<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
+								<br><br>
+									@else
+									<a href="" class="btn btn-sm btn-success float-right ">
+									<i class="fa fa-clock"></i>
+									
+									Agendar
+								</a>	
+								<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+								<br><br>
+								@endif
+								<div class="price-wrap h5" style="font-weight:bold; font-size:15px">
+									<span class="price-new my-2" style="color: green; ">${{ $product->price - (($product->price * $product->promotion)/100)  }}</span> <del class="price-old float-right " style="color: red">${{$product->price }}</del>
+								</div> <!-- price-wrap.// -->
+
+							</div>
+							 <!-- bottom-wrap.// -->
+						</figure>
+	</div>
+@endforeach
 </div> <!-- row.// -->
 
+{{ $products->links() }}
 
 </div><!-- container // -->
 </section>
 <!-- ========================= SECTION CONTENT .END// ========================= -->
+@push('js')
+	<script type="text/javascript" src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
 
+	<script>
+		 $(document).ready(function() {
+			$('#example-getting-started2').multiselect(
+				{
+					includeSelectAllOption: true,
+					numberDisplayed: 1,
+					enableFiltering: true,
+					maxHeight: 250,
+					enableCaseInsensitiveFiltering:true,
+					includeFilterClearBtn: true
+				}
+			);
+			$('#example-getting-started3').multiselect(
+				{
+					includeSelectAllOption: true,
+					numberDisplayed: 1,
+					enableFiltering: true,
+					maxHeight: 250,
+					enableCaseInsensitiveFiltering:true,
+					includeFilterClearBtn: true
+				}
+			);
+
+			$('#xf').on('mouseover',function(){
+				console.log($('#xxpf').serialize());
+			});
+    });
+	</script>
+@endpush
 @endsection

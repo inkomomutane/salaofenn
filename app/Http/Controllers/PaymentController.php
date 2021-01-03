@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Payment\CreatePayment;
 use App\Http\Requests\Payment\UpdatePayment;
 use App\Payment;
-use Illuminate\Http\Request;
+use Karson\MpesaPhpSdk\Mpesa;
 
 class PaymentController extends Controller
 {
@@ -16,7 +16,19 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return Payment::with('orders')->get();
+        
+         $mpesa = new Mpesa();
+         $mpesa->setApiKey('83f7zvajuj5dp27aj9fsrcm1py6lqsr4');
+         $mpesa->setPublicKey('MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmptSWqV7cGUUJJhUBxsMLonux24u+FoTlrb+4Kgc6092JIszmI1QUoMohaDDXSVueXx6IXwYGsjjWY32HGXj1iQhkALXfObJ4DqXn5h6E8y5/xQYNAyd5bpN5Z8r892B6toGzZQVB7qtebH4apDjmvTi5FGZVjVYxalyyQkj4uQbbRQjgCkubSi45Xl4CGtLqZztsKssWz3mcKncgTnq3DHGYYEYiKq0xIj100LGbnvNz20Sgqmw/cH+Bua4GJsWYLEqf/h/yiMgiBbxFxsnwZl0im5vXDlwKPw+QnO2fscDhxZFAwV06bgG0oEoWm9FnjMsfvwm0rUNYFlZ+TOtCEhmhtFp+Tsx9jPCuOd5h2emGdSKD8A6jtwhNa7oQ8RtLEEqwAn44orENa1ibOkxMiiiFpmmJkwgZPOG/zMCjXIrrhDWTDUOZaPx/lEQoInJoE2i43VN/HTGCCw8dKQAwg0jsEXau5ixD0GUothqvuX3B9taoeoFAIvUPEq35YulprMM7ThdKodSHvhnwKG82dCsodRwY428kg2xM/UjiTENog4B6zzZfPhMxFlOSFX4MnrqkAS+8Jamhy1GgoHkEMrsT5+/ofjCx0HjKbT5NuA2V/lmzgJLl3jIERadLzuTYnKGWxVJcGLkWXlEPYLbiaKzbJb2sYxt+Kt5OxQqC1MCAwEAAQ==');
+         $mpesa->setEnv('test');// 'live' production environment
+
+         //This creates transaction between an M-Pesa short code to a phone number registered on M-Pesa.
+
+         $result = $mpesa->c2b('11114', '258848874115','10', 'T340000000000000000000000000000', '171717');
+
+         return response()->json($result);
+         //dd($result);
+       // return Payment::with('orders')->get();
     }
 
     /**
