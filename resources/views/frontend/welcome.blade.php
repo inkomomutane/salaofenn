@@ -85,22 +85,30 @@
 		</header>
 		<div style="" class="filter-content collapse show" id="collapse22">
 			<div class="card-body">
+				
+				
 				<ul class="list-unstyled list-lg">
-					<a href="#">
+					<a href="{{ route('filter') }}">
 						<li  class="active_category">Todas<span class="float-right badge badge-light round">
 									{{ App\Product::count() }}
 							</span>
 						</li>
 					</a>
 					@foreach (App\Category::all() as  $category)
-					<a href="#">
-						<li>{{ $category->name}} <span class="float-right badge badge-light round">
-								{{ App\Product::whereIn('sub_category_id',App\SubCategory::where('category_id',$category->id)->get('id'))->count() }}
-							</span>
-						</li>
-					 </a>
+						<form action="{{ route('filter') }}" method="POst" id="hash{{ $category->id }}"> 
+						@csrf
+						<input type="hidden" name="categories[]" value="{{ $category->id }}">
+						<a href="#" onclick="$('#hash{{ $category->id }}').submit()">
+							<li>{{ $category->name}} <span class="float-right badge badge-light round">
+									{{ App\Product::whereIn('sub_category_id',App\SubCategory::where('category_id',$category->id)->get('id'))->count() }}
+								</span>
+							</li>
+						</a>
+					</form>
 					@endforeach
+					
 				</ul>  
+				
 			</div> <!-- card-body.// -->
 		</div> <!-- collapse .// -->
 	</article> <!-- card-group-item.// -->
@@ -112,45 +120,25 @@
 			</a>
 		</header>
 		<div class="filter-content collapse show" id="collapse33">
+			<form action="{{ route('filter') }}" method="POst"> 
+						@csrf
 			<div class="card-body">
 				<div class="form-row">
 				<div class="form-group col-md-6">
 				  <label>Mínimo</label>
-				  <input class="form-control" placeholder="$0" type="number">
+				  <input class="form-control" placeholder="$0" name="minPrice" type="number">
 				</div>
 				<div class="form-group text-right col-md-6">
 				  <label>Maximo</label>
-				  <input class="form-control" placeholder="$1,0000" type="number">
+				  <input class="form-control" placeholder="$1,0000" name="maxPrice" type="number">
 				</div>
 				</div> <!-- form-row.// -->
 			</div> <!-- card-body.// -->
 			<button class="btn btn-block btn-outline-primary">Filtrar</button>
-		</div> <!-- collapse .// -->
-	</article> <!-- card-group-item.// -->
-	<article class="card-group-item">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse44">
-				<i class="icon-action fa fa-chevron-down"></i>
-				<h6 class="title">Por tags</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse44">
-			<div class="card-body">
-			<form>
-				@foreach (\App\Tag::all()->random(5) as $tag )
-				<label class="form-check">
-				  <input class="form-check-input" value="" type="checkbox">
-				  <span class="form-check-label">
-				  	<span class="float-right badge badge-light round">{{ $tag->products->count() }} </span>
-					 {{ $tag->name }}
-				  </span>
-				</label>  <!-- form-check.// -->
-				@endforeach
 			</form>
-			</div> <!-- card-body.// -->
 		</div> <!-- collapse .// -->
-		<button class="btn btn-block btn-outline-primary">Filtrar</button>
 	</article> <!-- card-group-item.// -->
+
 </div> <!-- card.// -->
 
 
@@ -161,7 +149,7 @@
 			<div class="card-body">
 			<div class="row">
 				<aside class="col-sm-3">
-					<div class="img-wrap"><img src="images/items/2.jpg"></div>
+					<div class="img-wrap"><img src="{{ $product->image }}"></div>
 				</aside> <!-- col.// -->
 				<article class="col-sm-6">
 						<h4 class="title"> {{ $product->name }}  </h4>
@@ -191,13 +179,13 @@
 						@if ($product->subCategory->category->id ==1)
 								
 							<p>
-								<a href="#" class="btn btn-success">
+								<a href="{{ route('comprar',$product->id) }}" class="btn btn-success">
 									<i class="fa fa-money-bill-alt"></i>
 									Comprar agora
 								</a>
 							</p>
 							<p>
-								<a href="#" class="btn btn-primary">
+								<a href="{{ route('cart',$product->id) }}" class="btn btn-primary">
 									<i class="fa fa-shopping-cart"></i>
 									+ a Carrinha
 								</a>
@@ -209,14 +197,14 @@
 								</a>
 							</p>
 							<p>
-								<a href="#" class="btn btn-danger">
+								<a href="{{ route('favorite',$product->id) }}" class="btn btn-danger">
 									<i class="fa fa-heart"></i>
 									+ a Favoritos
 								</a>
 							</p>
 							@else
 								<p>
-							<a href="#" class="btn btn-success">
+							<a href="{{ route('agendar',$product->id) }}" class="btn btn-success">
 								<i class="fa fa-clock "></i>
 								Agendar agora
 							</a>
@@ -228,7 +216,7 @@
 							</a>
 						</p>
 						<p>
-							<a href="#" class="btn btn-danger">
+							<a href="{{ route('favorite',$product->id) }}" class="btn btn-danger">
 								<i class="fa fa-heart"></i>
 								+ a Favoritos
 							</a>
@@ -261,7 +249,7 @@
 					<div class="item-slide">
 						<figure class="card card-product">
 							<span class="badge-offer"><b> - {{$product->promotion}}%</b></span>
-							<div class="img-wrap"> <a href="{{ asset('/') }}images/items/1.jpg" data-fancybox="" class="item-gallery"><img src=" {{ asset('/') }}images/items/1.jpg"></a><a class="btn-overlay" href="{{ route('product_detail', ['product'=>$product->id]) }}"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
+							<div class="img-wrap"> <a href="{{ $product->image }}" data-fancybox="" class="item-gallery"><img src="{{ $product->image }}"></a><a class="btn-overlay" href="{{ route('product_detail', ['product'=>$product->id]) }}"><i class="fa fa-search-plus"></i>Ver Detalhes</a></div>
 							<figcaption class="info-wrap text-center">
 								<h6 class="title text-truncate"><a href="{{ route('product_detail', ['product'=>$product->id]) }}">{{$product->name}}</a></h6>
 								<dl class="dlist-align">
@@ -281,19 +269,19 @@
 								@if ($product->subcategory->category->id == 1)
 									
 								
-								<a href="" class="btn btn-sm btn-success float-right ">
+								<a href="{{ route('comprar',$product->id) }}" class="btn btn-sm btn-success float-right ">
 									<i class="fa fa-money-bill-alt"></i>
 									Comprar 
 								</a>	
-								<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
+								<a href = "{{ route('cart',$product->id) }}"  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
 								<br><br>
 									@else
-									<a href="" class="btn btn-sm btn-success float-right ">
+									<a href="{{ route('agendar',$product->id) }}" class="btn btn-sm btn-success float-right ">
 									<i class="fa fa-clock"></i>
 									
 									Agendar
 								</a>	
-								<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+								<a href = "{{ route('favorite',$product->id) }}"  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
 								<br><br>
 								@endif
 								<div class="price-wrap h5" style="font-weight:bold; font-size:15px">

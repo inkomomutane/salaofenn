@@ -52,4 +52,12 @@ class Product extends Model
         )->using(ProductTag::class)->withTimestamps();
     }
 
+    public function carts()
+    {
+        return $this->hasMany(
+            Cart::class,
+            'product_id'
+        );
+    }
+
 }

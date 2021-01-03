@@ -24,7 +24,7 @@ class PaymentController extends Controller
 
          //This creates transaction between an M-Pesa short code to a phone number registered on M-Pesa.
 
-         $result = $mpesa->c2b('11114', '258848874115','10', 'T340000000000000000000000000000', '171717');
+         $result = $mpesa->c2b('11114', '258847607095','10', 'T34000000000000000000', '171717');
 
          return response()->json($result);
          //dd($result);

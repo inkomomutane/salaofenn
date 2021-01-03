@@ -30,17 +30,26 @@
 <div class="row">
 	<!-- col.// -->
 	
+	<div class="col-md-2-24"> <strong>Filtrar por:</strong></div> <!-- col.// -->
+	
 </div> <!-- row.// -->
 <hr>
 <div class="row">
-	<div class="col-md-3-24"> <strong>Filtrar:</strong></div> <!-- col.// -->
-	<div class="col-md-21-24"> 
+	<div class="col-12"> 
 		<form method="post" action="{{ route('filter') }}" id="xxpf">
 			@csrf
 			
 		<ul class="list-inline">
+			<li class="list-inline-item">
+		  		<label class="mr-1">cat's</label>
+				<select id="example-getting-started" multiple="multiple" name ="categories[]" class="list-inline-item dropdown" value="0">
+					@foreach (App\Category::all() as $item)
+						<option value="{{ $item->id }}" >{{ $item->name }}</option>
+					@endforeach
+				</select>
+		  </li>
 		   <li class="list-inline-item">
-		  		<label class="mr-2">Por categorias</label>
+		  		<label class="mr-1">subcat's</label>
 				<select id="example-getting-started2" multiple="multiple" name ="subcategories[]" class="list-inline-item dropdown" value="0">
 					@foreach (App\SubCategory::all() as $item)
 						<option value="{{ $item->id }}" >{{ $item->name }}</option>
@@ -48,7 +57,7 @@
 				</select>
 		  </li>
 		  <li class="list-inline-item">
-		  		<label class="mr-2">Por tags</label>
+		  		<label class="mr-1">tags</label>
 				<select id="example-getting-started3" multiple="multiple" name ="tags[]" class="form-control form-control-sm">
 					@foreach (App\Tag::all() as $item)
 						<option value="{{ $item->id }}" >{{ $item->name }}</option>
@@ -58,13 +67,13 @@
 
 		  <li class="list-inline-item">
 		  	<div class="form-inline">
-		  		<label class="mr-2">Por Preço</label>
+		  		<label class="mr-1">preços</label>
 				<input class="form-control form-control-sm" name= 'minPrice' placeholder="Min" type="number">
 					<span class="px-2"> - </span>
 				<input class="form-control form-control-sm" name='maxPrice' placeholder="Max" type="number">
-				<input type="submit" class="btn btn-sm ml-2" value="Ok" id="xf"></input>
+				<button type="submit" class="btn btn-success btn-sm ml-2" value="Ok" id="xf"><i class="fa fa-search" > </i> Filtrar</button>
 			  </form>
-			  <a class = "btn  btn-success btn-sm ml-2" href = "{{ route('filter') }}"><i class="fa fa-sync" ></i> Remover filtro</a>
+			  <a class = "btn  btn-warning btn-sm ml-2" href = "{{ route('filter') }}"><i class="fa fa-sync" ></i> Remover filtro</a>
 			</div>
 		  </li>
 		</ul>
@@ -139,6 +148,16 @@
 
 	<script>
 		 $(document).ready(function() {
+			 $('#example-getting-started').multiselect(
+				{
+					includeSelectAllOption: true,
+					numberDisplayed: 1,
+					enableFiltering: true,
+					maxHeight: 250,
+					enableCaseInsensitiveFiltering:true,
+					includeFilterClearBtn: true
+				}
+			);
 			$('#example-getting-started2').multiselect(
 				{
 					includeSelectAllOption: true,

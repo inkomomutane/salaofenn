@@ -8731,6 +8731,7 @@
             background: #e5edf1;
             padding: .375rem;
             border-radius: 4px;
+            color: #0056b3 !important;
         }
         
         .list-unstyled li {

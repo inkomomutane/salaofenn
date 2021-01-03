@@ -16,4 +16,11 @@ class Status extends Model
             'status_id'
         );
     }
+    public function carts()
+    {
+        return $this->hasMany(
+            Cart::class,
+            'status_id'
+        );
+    }
 }

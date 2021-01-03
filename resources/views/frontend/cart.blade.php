@@ -35,34 +35,25 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+
+	@foreach ($carts as $cart)
+		<tr>
 	<td>
-<figure class="media">
-	<div class="img-wrap"><img src="images/items/1.jpg" class="img-thumbnail img-sm"></div>
-	<figcaption class="media-body">
-		<h6 class="title text-truncate">Product name goes here </h6>
-		<dl class="dlist-inline small">
-		  <dt>Size: </dt>
-		  <dd>XXL</dd>
-		</dl>
-		<dl class="dlist-inline small">
-		  <dt>Color: </dt>
-		  <dd>Orange color</dd>
-		</dl>
-	</figcaption>
-</figure> 
+		<figure class="media">
+			<div class="img-wrap"><img src="images/items/1.jpg" class="img-thumbnail img-sm"></div>
+			<figcaption class="media-body">
+				<h6 class="title text-truncate">{{ $cart->product->name }}</h6>
+				<dl class="dlist-inline small">
+				<dt>Promotion: - {{ $cart->product->promotion }}%</dt>
+			</figcaption>
+		</figure> 
 	</td>
 	<td> 
-		<select class="form-control">
-			<option>1</option>
-			<option>2</option>	
-			<option>3</option>	
-			<option>4</option>	
-		</select> 
+		<input class="form-control" name="quantity" value="{{ $cart->quantity }}"></input> 
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">USD 145</var> 
+			<var class="price">USD {{ $cart->product->price }}</var> 
 			<small class="text-muted">(USD5 each)</small> 
 		</div> <!-- price-wrap .// -->
 	</td>
@@ -71,113 +62,49 @@
 	<a href="" class="btn btn-outline-danger"> × Remove</a>
 	</td>
 </tr>
-<tr>
-	<td>
-<figure class="media">
-	<div class="img-wrap"><img src="images/items/2.jpg" class="img-thumbnail img-sm"></div>
-	<figcaption class="media-body">
-		<h6 class="title text-truncate">Product name goes here </h6>
-		<dl class="dlist-inline small">
-		  <dt>Size: </dt>
-		  <dd>XXL</dd>
-		</dl>
-		<dl class="dlist-inline small">
-		  <dt>Color: </dt>
-		  <dd>Orange color</dd>
-		</dl>
-	</figcaption>
-</figure> 
-	</td>
-	<td> 
-		<select class="form-control">
-			<option>1</option>
-			<option>2</option>	
-			<option>3</option>	
-			<option>4</option>	
-		</select> 
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price">USD 35</var> 
-			<small class="text-muted">(USD10 each)</small> 
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-	<a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a> 
-	<a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-	</td>
-</tr>
-<tr>
-	<td>
-<figure class="media">
-	<div class="img-wrap"><img src="images/items/3.jpg" class="img-thumbnail img-sm"></div>
-	<figcaption class="media-body">
-		<h6 class="title text-truncate">Product name goes here </h6>
-		<dl class="dlist-inline small">
-		  <dt>Size: </dt>
-		  <dd>XXL</dd>
-		</dl>
-		<dl class="dlist-inline small">
-		  <dt>Color: </dt>
-		  <dd>Orange color</dd>
-		</dl>
-	</figcaption>
-</figure> 
-	</td>
-	<td> 
-		<select class="form-control">
-			<option>1</option>
-			<option>2</option>	
-			<option>3</option>	
-			<option>4</option>	
-		</select> 
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price">USD 45</var> 
-			<small class="text-muted">(USD15 each)</small> 
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-		<a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a> 
-		<a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-	</td>
-</tr>
+	@endforeach
+
+
 </tbody>
 </table>
 </div> <!-- card.// -->
 
 	</main> <!-- col.// -->
 	<aside class="col-sm-3">
-<p class="alert alert-success">Add USD 5.00 of eligible items to your order to qualify for FREE Shipping. </p>
+<p class="alert alert-success">Efetue o pagamento com o método mais adequado. </p>
 <dl class="dlist-align">
   <dt>Total price: </dt>
-  <dd class="text-right">USD 568</dd>
+  {{-- $carts->pluck('product_id') --}}
+  <dd class="text-right">USD {{App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('price')->sum()}}</dd>
 </dl>
 <dl class="dlist-align">
   <dt>Discount:</dt>
-  <dd class="text-right">USD 658</dd>
+  <dd class="text-right">USD {{(
+  App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('price')->sum()
+  *
+   App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('promotion')->sum())/100
+   }}</dd>
 </dl>
 <dl class="dlist-align h4">
   <dt>Total:</dt>
-  <dd class="text-right"><strong>USD 1,650</strong></dd>
+  <dd class="text-right"><strong>USD  {{
+	  App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('price')->sum()
+	  -
+  (
+  App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('price')->sum()
+  *
+   App\Product::whereIn('id',$carts->pluck('product_id'))->pluck('promotion')->sum())/100
+   }}</strong></dd>
 </dl>
 <hr>
-<figure class="itemside mb-3">
-	<aside class="aside"><img src="images/icons/pay-visa.png"></aside>
+<a href="{{ route('payment.index') }}">
+<figure class="itemside mb-3 active_category" style="background:rgb(245, 129, 129)">
+	<aside class="aside"><img src="images/mpesa.jpg"></aside>
 	 <div class="text-wrap small text-muted">
-Pay 84.78 AED ( Save 14.97 AED )
-By using ADCB Cards 
+		 Pagamento Via M-pesa
 	 </div>
 </figure>
-<figure class="itemside mb-3">
-	<aside class="aside"> <img src="images/icons/pay-mastercard.png"> </aside>
-	<div class="text-wrap small text-muted">
-Pay by MasterCard and Save 40%. <br>
-Lorem ipsum dolor 
-	</div>
-</figure>
-
+</a>
 	</aside> <!-- col.// -->
 </div>
 

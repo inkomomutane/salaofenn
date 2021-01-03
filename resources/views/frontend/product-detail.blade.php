@@ -36,7 +36,7 @@
 		<aside class="col-sm-6 border-right">
 <article class="gallery-wrap"> 
 <div class="img-big-wrap">
-  <div> <a href="{{ asset('/') }}images/items/2.jpg" data-fancybox=""><img src=" {{ asset('/') }}images/items/1.jpg"></a></div>
+  <div> <a href="{{ $product->image }}" data-fancybox=""><img src="{{ $product->image }}"></a></div>
 </div> <!-- slider-product.// -->
 <div class="img-small-wrap">
 	<a href="{{ asset('/') }}images/items/1.jpg" data-fancybox="" class="item-gallery"><img src=" {{ asset('/') }}images/items/1.jpg"></a>

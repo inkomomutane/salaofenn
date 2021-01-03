@@ -6,9 +6,8 @@ use App\Http\Requests\Product\CreateProduct;
 use App\Http\Requests\Product\UpdateProduct;
 use App\Product;
 use App\ProductTag;
-use App\Tag;
+use App\SubCategory;
 use Illuminate\Http\Request;
-use Dotenv\Validator; 
 
 class ProductController extends Controller
 {
@@ -83,7 +82,10 @@ class ProductController extends Controller
         if($request->method() == 'GET' ){
              return view('frontend.search-product')->with('products',Product::paginate(12));
         }else{
-
+            $categories = [];
+            if($request->categories!=null){
+                $categories= $request->categories;
+            }
             $tags = [];
             if($request->tags!=null){
                 $tags= $request->tags;
@@ -101,7 +103,13 @@ class ProductController extends Controller
                 $max= $request->maxPrice;
             }     
             
-                $products = Product::where([
+            //dd($min);
+                $products = Product
+                ::whereIn(
+                    'sub_category_id',
+                    SubCategory::whereIn(
+                        'category_id',$categories)->pluck('id')
+                )->orWhere([
                     ['price','>',$min],
                     ['price','<',$max],
                 ])->orWhereIn(
@@ -109,8 +117,9 @@ class ProductController extends Controller
                 )->orWhereIn(
                     'id',ProductTag::whereIn(
                         'tag_id',$tags
-                    )->get('product_id')
-                )->paginate(12);
+                    )->pluck('product_id')
+                )->paginate(400);
+                
                  return view('frontend.search-product')->with('products',$products);
             
         }

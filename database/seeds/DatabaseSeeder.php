@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         factory(App\User::class,40)->create();  
+       factory(App\User::class,40)->create();  
         $this->call(CategorySeeder::class);
         $this->call(SubCategorySeeder::class);
         $this->call(FornecedorSeeder::class);
@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusSeeder::class);
         $this->call(TagSeeder::class);
          factory(App\ProductTag::class,40)->create(); 
+        $this->call(CartSeeder::class);
         
     }
 }

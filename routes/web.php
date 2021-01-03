@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','HomePageController@index');
 Route::get('/details/{product}','ProductController@Webshow')->name('product_detail');
-Route::get('/cart', function () {
+Route::get('/cart/{product}', function (Product $product) {
+
+   // return "Cart ${product}";
     return view('frontend.cart');
-});
+})->name('cart');
+
+Route::resource('carts', 'CartController');
+
+
+Route::get('/agendar/{product}', function (Product $product) {
+    return "agendar ${product}";
+})->name('agendar');
+
+Route::get('/comprar/{product}', function (Product $product) {
+    return "comprar ${product}";
+})->name('comprar');
+
+Route::get('/favorites/{product}', function (Product $product) {
+    return "favoritos ${product}";
+})->name('favorite');
+
+
+
 
 Route::any('/filter','ProductController@SearchProduct')->name('filter');
 
