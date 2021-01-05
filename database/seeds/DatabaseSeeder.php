@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(StatusSeeder::class);
         $this->call(TagSeeder::class);
-         factory(App\ProductTag::class,40)->create(); 
+        factory(App\ProductTag::class,40)->create(); 
         $this->call(CartSeeder::class);
         
     }

@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Role::class, function (Faker $faker) {
     return [
         'name'=>$faker->name,
-        'slug'=>$faker->word
+        'slug'=>$faker->word,
+        'level'=>$faker->numberBetween(1,6)
     ];
 });

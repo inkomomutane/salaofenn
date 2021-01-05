@@ -8,7 +8,8 @@ class Role extends Model
 {
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'level'
     ];
 
     public function users()
