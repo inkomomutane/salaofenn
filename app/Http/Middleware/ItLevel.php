@@ -16,10 +16,10 @@ class ItLevel
      */
     public function handle($request, Closure $next)
     {
-       if(Auth::check() && Auth::user()->role->level== 2){
+        if ((Auth::check() && Auth::user()->role->level == 2)) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return abort(401);
         }
     }
 }

@@ -16,10 +16,10 @@ class EmployeeLevel
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role->level== 4){
+         if ((Auth::check() && Auth::user()->role->level == 4)) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return abort(401);
         }
     }
 }

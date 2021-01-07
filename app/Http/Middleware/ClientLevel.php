@@ -16,10 +16,10 @@ class ClientLevel
      */
     public function handle($request, Closure $next)
     {
-       if(Auth::check() && Auth::user()->role->level== 6){
+        if ((Auth::check() && Auth::user()->role->level == 6)) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return abort(401);
         }
     }
 }

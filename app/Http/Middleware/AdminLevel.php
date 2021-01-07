@@ -16,10 +16,11 @@ class AdminLevel
      */
     public function handle($request, Closure $next)
     {
-         if(Auth::check() && Auth::user()->role->level== 1){
+        if ((Auth::check() && Auth::user()->role->level == 1)) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return abort(401);
         }
+        
     }
 }

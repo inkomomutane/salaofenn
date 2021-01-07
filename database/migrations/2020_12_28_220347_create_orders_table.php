@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('product_or_service_name');
             $table->integer('quantity');
             $table->double('total_price');
-            $table->timestamp('start_at');
-            $table->timestamp('end_at');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->string('maded_by');
             $table->foreignId('status_id');
             $table->foreignId('user_id');

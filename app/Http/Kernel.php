@@ -2,6 +2,12 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminLevel;
+use App\Http\Middleware\CashierLevel;
+use App\Http\Middleware\ClientLevel;
+use App\Http\Middleware\EmployeeLevel;
+use App\Http\Middleware\ItLevel;
+use App\Http\Middleware\PublisherLevel;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,5 +68,11 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin'=>AdminLevel::class,
+        'it'=>ItLevel::class,
+        'cashier'=>CashierLevel::class,
+        'employee'=>EmployeeLevel::class,
+        'publisher'=>PublisherLevel::class,
+        'client'=>ClientLevel::class,
     ];
 }

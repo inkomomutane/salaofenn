@@ -29,7 +29,6 @@ class CreateOrder extends FormRequest
             'quantity'=>'required',
             'total_price' =>'required',
             'maded_by'=>'required',
-            'status_id' =>'required',
             'user_id' =>'required',
             'payment_id' =>'required' 
         ];

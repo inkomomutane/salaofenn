@@ -30,9 +30,7 @@ Route::get('/agendar/{product}', function (Product $product) {
     return "agendar ${product}";
 })->name('agendar');
 
-Route::get('/comprar/{product}', function (Product $product) {
-    return "comprar ${product}";
-})->name('comprar');
+Route::get('/comprar/{product}', 'OrderController@buyOne')->name('comprar');
 
 Route::get('/favorites/{product}', function (Product $product) {
     return "favoritos ${product}";
@@ -55,6 +53,6 @@ Route::resource('service', 'ServiceController');
 Route::resource('status', 'StatusController');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Dashboard\DashboardController@index')->name('home')->middleware(['auth']);
 Route::get('developers','DevelopersController@index')->name('developers.index')->middleware('auth');
 Route::get('/index','RoleController@Webindex');
