@@ -99,7 +99,12 @@
 								<dt>Categoria</dt>
 								<dd >
 									<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
-										<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">{{ $product->subcategory->category->name }}</a></li>
+										<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">
+											@if ($product->subcategory !=null)
+												{{ $product->subcategory->category->name }}	
+											@endif
+											
+										</a></li>
 									</ol>
 								</dd>
 								</dl> 
@@ -109,24 +114,26 @@
 
 
 							<div class="bottom-wrap">
-								@if ($product->subcategory->category->id == 1)
-									
-								
-								<a href="" class="btn btn-sm btn-success float-right ">
-									<i class="fa fa-money-bill-alt"></i>
-									Comprar 
-								</a>	
-								<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
-								<br><br>
-									@else
+
+								@if ($product->subcategory !=null)
+										@if ($product->subcategory->category->id == 1)
 									<a href="" class="btn btn-sm btn-success float-right ">
-									<i class="fa fa-clock"></i>
-									
-									Agendar
-								</a>	
-								<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
-								<br><br>
+										<i class="fa fa-money-bill-alt"></i>
+										Comprar 
+									</a>	
+									<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
+									<br><br>
+										@else
+										<a href="" class="btn btn-sm btn-success float-right ">
+										<i class="fa fa-clock"></i>
+										
+										Agendar
+									</a>	
+									<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+									<br><br>
 								@endif
+								@endif
+							
 								<div class="price-wrap h5" style="font-weight:bold; font-size:15px">
 									<span class="price-new my-2" style="color: green; ">${{ $product->price - (($product->price * $product->promotion)/100)  }}</span> <del class="price-old float-right " style="color: red">${{$product->price }}</del>
 								</div> <!-- price-wrap.// -->

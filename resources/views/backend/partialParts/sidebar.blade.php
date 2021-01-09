@@ -9,39 +9,81 @@
         
         @switch(Auth::user()->role->level)
             @case(1)
-                <ul class="sidebar-menu"> 
+               <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul>  
                 @break
             @case(2)
                  <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul> 
                 @break
             @case(3)
-                 <ul class="sidebar-menu"> 
+               <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="fa fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul> 
                 @break
             @case(4)
                  <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul> 
                 @break
             @case(5)
                  <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul> 
                 @break
             @case(6)
-                 <ul class="sidebar-menu"> 
+                <ul class="sidebar-menu"> 
                     <li class="menu-header">Dashboard</li>
-                    <li class=active><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="
+                        @if (\Route::current()->getName() ==  'home' )
+                            {{ __('active') }}
+                        @endif
+                    "><a class="nav-link" href="{{ route('home') }}"><i class="far fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                     <li @if (\Route::current()->getName() == 'buylogs' )
+                           class = " {{ __('active') }}"
+                        @endif><a class="nav-link" href="{{ route('buylogs') }}"><i class="fa fa-shopping-bag"></i> <span>Registo de Compras</span></a></li>
                 </ul> 
                 @break
         @endswitch

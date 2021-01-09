@@ -1,23 +1,13 @@
 @extends('layouts.frontendLayout')
 @section('content')
-
-@php
-	$order  = \App\Order::find(1);
-	$order->sera  = 3;
-@endphp
-
-{{ $order }}
-
-
 <section class="section-pagetop bg-secondary">
 <div class="container clearfix">
-	<h2 class="title-page">Page heading</h2>
+	<h2 class="title-page"><i class="fa fa-shopping-basket"></i> Comprar: <b class="alert alert-success">{{ $product->name }}</b></h2>
 
 	<nav class="float-left">
 	<ol class="breadcrumb  bg-white px-3 py-1">
-	    <li class="breadcrumb-item"><a href="#">Home</a></li>
-	    <li class="breadcrumb-item"><a href="#">Library</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Data</li>
+	    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+	    <li class="breadcrumb-item active"  aria-current="page"><a href="" style="color: gray">Comprar</a></li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -27,6 +17,11 @@
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content bg padding-y border-top">
 <div class="container">
+	 @if (session('error'))
+                        <div class="alert alert-danger shadow-sm" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
 <div class="row">
 	<main class="col-sm-9">
@@ -37,6 +32,7 @@
 <tr>
   <th scope="col">Product</th>
   <th scope="col" width="120">Quantity</th>
+  <th scope="col" width = "300">Contact </th>
   <th scope="col" width="120">Price</th>
 </tr>
 </thead>
@@ -45,7 +41,7 @@
 		<tr>
 	<td>
 		<figure class="media">
-			<div class="img-wrap"><img src="{{ asset('images/items/1.jpg') }}" class="img-thumbnail img-sm"></div>
+			<div class="img-wrap"><img src="{{ $product->image}}" class="img-thumbnail img-sm"></div>
 			<figcaption class="media-body">
 				<h6 class="title text-truncate">{{ $product->name }}</h6>
 				<dl class="dlist-inline small">
@@ -55,23 +51,24 @@
 	</td>
 	<td>
 
-		<form method="POST" action="{{ route('order.store') }}" id="order">
+		<form method="POST" action="{{ route('order.storeWeb') }}" id="order">
 			@csrf
 
 		<input type="hidden" name="client_name" value="{{ Auth::user()->name }}">
 		<input type="hidden" name="product_or_service_name" value="{{ $product->name }}">
-		<input class="form-control"  type="number" min="0" name="quantity" onchange="dart(this)" onmouseover="dart(this)" id="qty" value="0">
+		<input class="form-control"  type="number" min="0" name="quantity" onchange="dart(this)" onmouseover="dart(this)"  onkeypress="dart(this)" onkeyup="dart(this)" onkeydown="dart(this)" id="qty" value="{{ old('quantity') }}">
 		<input type = "hidden" name="total_price">
 		<input type="hidden" name="maded_by" value="{{ Auth::user()->name }}">
 		<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 		<input type="hidden" name="payment_id" value="1">
 		<input type="hidden" name="status_id" value="0">
-		<input type="hidden" name = "contact" value="847607095">
+		
 	</td>
+	<td><input type="text" name = "contact" value="847607095" class="form-control"></td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">USD {{ $product->price }}</var> 
-			<small class="text-muted">(USD each)</small> 
+			<var class="price">MZN {{ $product->price }}</var> 
+			<small class="text-muted">(MZN Cada)</small> 
 		</div> <!-- price-wrap .// -->
 	</td>
 </tr>
@@ -112,8 +109,6 @@
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <script>
-	
-
 	function dart(dart){
 		if(dart.value == NaN || dart.value == undefined) {
 			dart.value = 0;
@@ -125,21 +120,18 @@
 	}
 
 	$(document).ready(function () {
-
 		dart($('#qty'));
 	});
 	
 	$('#send').click(function(e){
 		e.preventDefault();
-		qty  = $('#order')[0]['quantity'].value;
-		var subtotal =  qty * {!! $product->price !!};
-		var descount =  qty * {!! ($product->price * ($product->promotion/100) ) !!};
+		var quantity = $('#qty')[0].value;
+		var subtotal = quantity * {!! $product->price !!};
+		var descount =  quantity * {!! ($product->price * ($product->promotion/100) ) !!};
 		var total = subtotal - descount;
-		$('#order')[0]['total_price'].value = total;
-		var form   = $('#order').serializeArray();
-		console.log(form);
+		$("#order :input[name= total_price]")[0].value = total;
+		console.log($("#order :input[name= total_price]")[0].value);
 		$('#order').submit();
 	});
 </script>
-
 @endsection

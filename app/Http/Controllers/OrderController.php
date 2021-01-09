@@ -6,6 +6,7 @@ use App\Http\Requests\Order\CreateOrder;
 use App\Http\Requests\Order\UpdateOrder;
 use App\Order;
 use App\Product;
+use Dotenv\Result\Result;
 use Karson\MpesaPhpSdk\Mpesa;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,29 @@ class OrderController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storeWeb(CreateOrder $createOrderRequest)
+    {
+        //dd($createOrderRequest);
+        $result = $this->store($createOrderRequest);
+       // dd($result);
+        
+        if($result['status'] == 201 ){
+             session()->flash('success','Compra efetuada com sucesso.');
+            return redirect()->route('buylogs');
+        }else{
+            session()->flash('error','Erro ao efetuar a compra.');
+            return redirect()->back();
+        }
+    }
+
+
+
+    
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Order\CreateOrder $createOrderRequest
@@ -60,14 +84,19 @@ class OrderController extends Controller
                     //This creates transaction between an M-Pesa short code to a phone number registered on M-Pesa.
 
                     $result = $mpesa->c2b('11114', '258'.$createOrderRequest->contact,$createOrderRequest->total_price, 'T340'. Str::random(10), '171717');
+                  //  dd($result);
                     if($result->status == 201){
                          $created = Order::Create(
                             $createOrderRequest->all()
                         );
-                     return response()->json(['Order'=>$created,'message'=>'Order inserted successful','status'=>201],201);
+                     return ['Order'=>$created,'message'=>'Order inserted successful','status'=>201
+                        ];
+                    }else{
+                        //dd($result);
+                        return ['status'=>401];
                     }
     } catch (\Throwable $th) {
-            return response()->json(['error'=>$th],404);
+            return ['status'=> 401];
         }
     }
 

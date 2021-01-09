@@ -1,7 +1,6 @@
 <?php
 
 use App\Product;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,24 +16,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','HomePageController@index');
 Route::get('/details/{product}','ProductController@Webshow')->name('product_detail');
-Route::get('/cart/{product}', function (Product $product) {
 
-   // return "Cart ${product}";
-    return view('frontend.cart');
+Route::get('buylog', function () {
+   return view('backend.dashboard.buyLogs'); 
+})->name('buylogs');
+
+Route::get('/cart/{product}', function (Product $product) {
+    return "Cart ${product}";
+    //return view('frontend.cart');
 })->name('cart');
 
 Route::resource('carts', 'CartController');
-
 
 Route::get('/agendar/{product}', function (Product $product) {
     return "agendar ${product}";
 })->name('agendar');
 
-Route::get('/comprar/{product}', 'OrderController@buyOne')->name('comprar');
+Route::get('/comprar/{product}', 'OrderController@buyOne')->name('comprar')->middleware('auth');
 
 Route::get('/favorites/{product}', function (Product $product) {
     return "favoritos ${product}";
 })->name('favorite');
+
 
 
 
@@ -46,6 +49,7 @@ Route::resource('tag', 'TagController')->middleware('auth:api');
 Route::resource('subcategory', 'SubCategoryController');
 Route::resource('fornecedor', 'FornecedorController');
 Route::resource('order', 'OrderController');
+Route::post('orderWeb','OrderController@storeWeb')->name('order.storeWeb')->middleware('auth');
 Route::resource('payment', 'PaymentController');
 Route::resource('product', 'ProductController');
 Route::resource('role', 'RoleController');

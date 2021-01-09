@@ -3,13 +3,13 @@
 @section('content')
 <section class="section-pagetop bg-secondary">
 <div class="container clearfix">
-	<h2 class="title-page">Page heading</h2>
+	<h5 class="title-page">Detalhes: <b class="alert alert-success">{{ $product->name }}</b></h5>
 
-	<nav class="float-left">
+	<nav class="float-left my-2">
 	<ol class="breadcrumb  bg-white px-3 py-1">
-	    <li class="breadcrumb-item"><a href="#">Home</a></li>
-	    <li class="breadcrumb-item"><a href="#">Library</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Data</li>
+	    <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+	    <li class="breadcrumb-item"><a href="#">{{ $product->subcategory->category->name }}</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -20,9 +20,9 @@
 <div class="container">
 <nav class="mb-3">
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">{{ $product->subcategory->category->name }}</a></li>
-    <li class="breadcrumb-item"><a href="#">{{ $product->subcategory->name }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="">{{ $product->subcategory->category->name }}</a></li>
+    <li class="breadcrumb-item"><a href="">{{ $product->subcategory->name }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
 </ol> 
 </nav>
@@ -53,12 +53,18 @@
 
 <div class="mb-3"> 
 	<var class="price h3 text-warning"> 
-		<span class="currency">MZN $</span><span class="num">{{ $product->price }}</span>
+		<span class="currency">MZN </span><span class="num">{{ $product->price }}</span>
 	</var> 
-	<span>/per unity</span> 
+	<span>/Por unidade</span> 
+</div> <!-- price-detail-wrap .// -->
+<div class="mb-3"> 
+	<var class="price h3 text-danger"> 
+		<span class="currency"> </span><span class="num">{{ $product->promotion }}%</span>
+	</var> 
+	<span>De desconto por unidade</span> 
 </div> <!-- price-detail-wrap .// -->
 <dl>
-  <dt>Description</dt>
+  <dt>Breve descrição</dt>
   <dd><p>{{ $product->short_description}}</p></dd>
 </dl>
 
@@ -66,16 +72,10 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<dl class="dlist-inline">
-			  <dt>Quantity: </dt>
-			  <dd> 
-			  	<input class="form-control form-control-sm" style="width:70px;" name = "quantity">
-			  		
-			  </dd>
-			<!-- item-property .// -->
-		<!-- col.// -->
 		<!-- row.// -->
-		<a href="#" class="btn  btn-warning"> <i class="fa fa-shopping-cart"></i> Adicionar a Carrinha</a>
-		<a href="#" class="btn  btn-outline-warning"> Pagar </a>
+		<a href="{{ route('cart', ['product'=>$product->id]) }}" class="btn  btn-primary"> <i class="fa fa-shopping-cart"></i> Adicionar a Carrinha</a>
+		<a href="{{ route('comprar',$product->id) }}" class="btn  btn-success"> <i class="fa fa-money-bill-alt"></i> Comprar</a>
+		<a href="{{ route('favorite',$product->id) }}" class="btn  btn-danger"> <i class="fa fa-heart"></i> Adicionar a Favoritos</a>
 		</dl>  
 		</div> 
 	</div>
@@ -88,7 +88,7 @@
 <!-- PRODUCT DETAIL -->
 <article class="card mt-3">
 	<div class="card-body">
-		<h4>Detail overview</h4>
+		<h4>Descrição mais detalhada</h4>
 	<p>{{ $product->description }}</p>
 	</div> <!-- card-body.// -->
 </article> <!-- card.// -->
@@ -96,27 +96,6 @@
 <!-- PRODUCT DETAIL .// -->
 
 </div> <!-- col // -->
-<aside class="col-xl-2 col-md-3 col-sm-12">
-<div class="card">
-	<div class="card-header">
-	    Trade Assurance
-	</div>
-	<div class="card-body small">
-		 <span>China | Trading Company</span> 
-		 <hr>
-		 Transaction Level: Good <br> 
-		 Supplier Assessments: Best 
-		 <hr>
-		 11 Transactions $330,000+
-		 <hr>
-		 Response Time 24h <br>
-		 Response Rate: 94%  <br> 
-		 <hr>
-		 <a href="">Visit pofile</a>
-		 
-	</div> <!-- card-body.// -->
-</div> <!-- card.// -->
-</aside> <!-- col // -->
 </div> <!-- row.// -->
 
 

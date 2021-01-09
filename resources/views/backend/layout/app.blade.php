@@ -101,6 +101,7 @@
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/style.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard/assets/css/components.min.css') }}">
+@stack('css')
 </head>
 
 <body class="layout-4">
@@ -372,6 +373,7 @@
 <!-- Template JS File -->
 <script src="{{ asset('dashboard/js/scripts.js') }}"></script>
 <script src="{{ asset('dashboard/js/custom.js') }}"></script>
+@stack('js')
 </body>
 
 <!-- blank.html  Tue, 07 Jan 2020 03:35:42 GMT -->

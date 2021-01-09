@@ -61,13 +61,12 @@ $(document).ready(function() {
 
     <div class="collapse navbar-collapse" id="navbarsExample07">
       <ul class="navbar-nav mr-auto">
-        <li><a href="#" class="nav-link"> <i class="fab fa-facebook"></i> </a></li>
-		<li><a href="#" class="nav-link"> <i class="fab fa-instagram"></i> </a></li>
-		<li><a href="#" class="nav-link"> <i class="fab fa-twitter"></i> </a></li>
+        <li><a href="http://www.facebook.com/fenn.mz" class="nav-link"> <i class="fab fa-facebook"></i> </a></li>
+		<li><a href="http://www.intagram.com/nelson_mutane" class="nav-link"> <i class="fab fa-instagram"></i> </a></li>
+		<li><a href="http://www.twitter" class="nav-link"> <i class="fab fa-twitter"></i> </a></li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item"><a href="#" class="nav-link" > Delivery </a></li>
-		<li class="nav-item"><a href="#" class="nav-link" > Help </a></li>
+		<li class="nav-item"><a href="#" class="nav-link" ><i class="fa fa-exclamation-circle"></i> Suporte & reporte </a></li>
 		<li class="nav-item active">
 			<a class="nav-link" href="tel: +258847607095"> <i class="fa fa-phone"></i> Contacte-nos : +258847607095 </a>
 		</li>
