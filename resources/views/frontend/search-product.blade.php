@@ -117,19 +117,19 @@
 
 								@if ($product->subcategory !=null)
 										@if ($product->subcategory->category->id == 1)
-									<a href="" class="btn btn-sm btn-success float-right ">
+									<a href="{{ route('comprar', ['product'=>$product->id]) }}" class="btn btn-sm btn-success float-right ">
 										<i class="fa fa-money-bill-alt"></i>
 										Comprar 
 									</a>	
-									<a href = ""  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
+									<a href = " {{ route('cart', ['product'=>$product->id]) }}"  class = "btn btn-sm btn-info float-left "><i class = "fa fa-shopping-cart"></i>+ Carrinha</a>
 									<br><br>
 										@else
-										<a href="" class="btn btn-sm btn-success float-right ">
+										<a href="{{ route('agendar', ['product'=>$product->id]) }}" class="btn btn-sm btn-success float-right ">
 										<i class="fa fa-clock"></i>
 										
 										Agendar
 									</a>	
-									<a href = ""  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
+									<a href = "{{ route('favorite', ['product'=>$product->id]) }}"  class = "btn btn-sm btn-danger float-left "><i class = "fa fa-heart"></i>+ a Favoritos</a>
 									<br><br>
 								@endif
 								@endif

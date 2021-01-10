@@ -59,5 +59,15 @@ class Product extends Model
             'product_id'
         );
     }
+    
+     public function users()
+    {
+      return $this->belongsToMany(
+            User::class,
+            'product_user_favorites',
+            'product_id',
+            'user_id',
+      )->using(ProductUserFavorite::class)->withTimestamps();
+    }
 
 }

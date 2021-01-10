@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductUserFavorite;
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
-class ProductUserFavoriteController extends Controller
+class FavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class ProductUserFavoriteController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.dashboard.favorites');
     }
 
     /**
@@ -33,18 +34,22 @@ class ProductUserFavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Product $product,User $user)
     {
-        //
+            if(count($product->users()->wherePivot('user_id',$user->id)->get()) == 0){
+          $product->users()->attach($user->id);
+           return redirect()->back();
+    }
+    return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductUserFavorite  $productUserFavorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductUserFavorite $productUserFavorite)
+    public function show($id)
     {
         //
     }
@@ -52,10 +57,10 @@ class ProductUserFavoriteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductUserFavorite  $productUserFavorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductUserFavorite $productUserFavorite)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +69,10 @@ class ProductUserFavoriteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductUserFavorite  $productUserFavorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductUserFavorite $productUserFavorite)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +80,13 @@ class ProductUserFavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductUserFavorite  $productUserFavorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductUserFavorite $productUserFavorite)
+    public function destroy(Product $product, User $user)
     {
-        //
+        $user->favorites()->detach($product->id);
+        session()->flash('success','Produto ou servico removido dos favoritos');
+        return redirect()->back();
     }
 }

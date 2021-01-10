@@ -52,11 +52,15 @@
 						</dd>
 						</dl> 
 						 <!-- item-property-hor .// -->
-						 <a href="#">
+						 <form action="{{ route('filter') }}" method="POst" id="hashx{{ $category->id }}"> 
+						@csrf
+						<input type="hidden" name="subcategories[]" value="{{ $category->id }}">
+						<a href="#" onclick="$('#hashx{{ $category->id }}').submit()">
 							<li class="list-unstyled active_category">
 								Ver mais Itens
 							</li>
 						</a>
+					</form>
 				</figcaption>
 			</figure>
 			</div> <!-- card.// -->

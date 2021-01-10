@@ -60,4 +60,13 @@ class User extends Authenticatable
             'user_id'
         );
     }
+      public function favorites()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_user_favorites',
+            'user_id',
+            'product_id'
+        )->using(ProductUserFavorite::class)->withTimestamps();
+    }
 }

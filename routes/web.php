@@ -1,6 +1,9 @@
 <?php
 
 use App\Product;
+use App\ProductUserFavorites;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,9 +37,16 @@ Route::get('/agendar/{product}', function (Product $product) {
 
 Route::get('/comprar/{product}', 'OrderController@buyOne')->name('comprar')->middleware('auth');
 
+Route::get('favorites','FavoriteController@index')->name('favorites')->middleware('auth');
+Route::get('favorite/{product}/{user}','FavoriteController@destroy')->name('favorite_delete')->middleware('auth');
+
 Route::get('/favorites/{product}', function (Product $product) {
-    return "favoritos ${product}";
-})->name('favorite');
+    if(count($product->users()->wherePivot('user_id',Auth::user()->id)->get()) == 0){
+          $product->users()->attach(Auth::user()->id);
+           return redirect()->back();
+    }
+    return redirect()->back();
+})->name('favorite')->middleware('auth');
 
 
 
