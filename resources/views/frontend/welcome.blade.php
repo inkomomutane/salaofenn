@@ -22,15 +22,16 @@
 
 
 <!-- ================= main slide ================= -->
-<div class="owl-init slider-main owl-carousel" data-items="1" data-dots="false" data-nav="true">
+<div class="owl-init slider-main owl-carousel shadow" data-items="1" data-dots="false" data-nav="true">
 	<div class="item-slide">
-		<img src="images/banners/slide1.jpg">
+		<a href="images/banners/slide1.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide1.jpg"></a>
+	</div>
+	<div class="item-slide rounded">	<a href="images/banners/slide2.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide2.jpg"></a>
+	
 	</div>
 	<div class="item-slide rounded">
-		<img src="images/banners/slide2.jpg">
-	</div>
-	<div class="item-slide rounded">
-		<img src="images/banners/slide3.jpg">
+			<a href="images/banners/slide3.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide3.jpg"></a>
+	
 	</div>
 </div>
 <!-- ============== main slidesow .end // ============= -->

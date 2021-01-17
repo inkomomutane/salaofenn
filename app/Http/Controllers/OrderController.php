@@ -9,6 +9,8 @@ use App\Product;
 use Dotenv\Result\Result;
 use Karson\MpesaPhpSdk\Mpesa;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -19,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::with(['user','status','payment'])->get();
+        return Order::with(['user','status','payment','contact'=>null])->get();
     }
     /**
          * Display a listing of the resource.
@@ -52,6 +54,7 @@ class OrderController extends Controller
         //dd($createOrderRequest);
         $result = $this->store($createOrderRequest);
        // dd($result);
+       
         
         if($result['status'] == 201 ){
              session()->flash('success','Compra efetuada com sucesso.');
@@ -60,6 +63,59 @@ class OrderController extends Controller
             session()->flash('error','Erro ao efetuar a compra.');
             return redirect()->back();
         }
+    }
+    public function storeCart(Request $request){
+        $orders = [];
+        if($request!=NULL){
+            foreach($request->all()['cart'] as $order){
+                //return $order['user']['name'];
+                $orders[] = [
+                    'client_name' => $order['user']['name'],
+                    'product_or_service_name'=>$order['product']['name'],
+                    'quantity' => $order['quantity'],
+                    'total_price' => (
+                        ($order['quantity'] * $order['product']['price'])
+                        - 
+                        ($order['quantity'] * 
+                            ($order['product']['price']
+                                 * ($order['product']['promotion']/100)
+                                 )
+                        )
+                    ),
+                    'maded_by'=> Auth::user()->name,
+                    'status_id'=> $order['status']['id'],
+                    'user_id' => Auth::user()->id,
+                    'payment_id' =>$order['payment_id']
+                ];
+            }
+        }
+       // return $orders;
+        try {
+           $created =[];
+                    $mpesa = new Mpesa();
+                    $mpesa->setApiKey('83f7zvajuj5dp27aj9fsrcm1py6lqsr4');
+                    $mpesa->setPublicKey('MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmptSWqV7cGUUJJhUBxsMLonux24u+FoTlrb+4Kgc6092JIszmI1QUoMohaDDXSVueXx6IXwYGsjjWY32HGXj1iQhkALXfObJ4DqXn5h6E8y5/xQYNAyd5bpN5Z8r892B6toGzZQVB7qtebH4apDjmvTi5FGZVjVYxalyyQkj4uQbbRQjgCkubSi45Xl4CGtLqZztsKssWz3mcKncgTnq3DHGYYEYiKq0xIj100LGbnvNz20Sgqmw/cH+Bua4GJsWYLEqf/h/yiMgiBbxFxsnwZl0im5vXDlwKPw+QnO2fscDhxZFAwV06bgG0oEoWm9FnjMsfvwm0rUNYFlZ+TOtCEhmhtFp+Tsx9jPCuOd5h2emGdSKD8A6jtwhNa7oQ8RtLEEqwAn44orENa1ibOkxMiiiFpmmJkwgZPOG/zMCjXIrrhDWTDUOZaPx/lEQoInJoE2i43VN/HTGCCw8dKQAwg0jsEXau5ixD0GUothqvuX3B9taoeoFAIvUPEq35YulprMM7ThdKodSHvhnwKG82dCsodRwY428kg2xM/UjiTENog4B6zzZfPhMxFlOSFX4MnrqkAS+8Jamhy1GgoHkEMrsT5+/ofjCx0HjKbT5NuA2V/lmzgJLl3jIERadLzuTYnKGWxVJcGLkWXlEPYLbiaKzbJb2sYxt+Kt5OxQqC1MCAwEAAQ==');
+                    $mpesa->setEnv('test');// 'live' production environment
+
+                    //This creates transaction between an M-Pesa short code to a phone number registered on M-Pesa.
+
+                   $result = $mpesa->c2b('11114', '258'.$request['contact'],$request['total_price'], 'T340'. Str::random(10), '171717');
+               //   $result = 
+                if($result->status == 201){
+                    foreach($orders as $order ){
+                            $created[] =  Order::UpdateOrCreate($order);
+                        }
+                            return ['Orders'=>$created,'message'=>'Order inserted successful','status'=>201
+                                        ];
+                }else{
+                    return ['status'=>401,'message'=>$result->response];;
+                }
+           
+          
+        } catch (\Throwable $th) {
+            return ['status'=>401,'message'=>$th];
+        }
+        return ['status'=>401];
     }
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -15,9 +16,33 @@ class CartController extends Controller
      */
     public function index()
     {
-         $carts = Cart::with(['user','product','payment','status'])->get();
-
+         $carts = Cart::with(['user','product','payment','status'])->where('user_id',Auth::user()->id)->get();
          return view('frontend.cart')->with('carts',$carts);
+    }
+
+    
+    function add(Product $product)
+    {
+        
+         
+        //return $product;
+        try {
+            Cart::updateOrCreate([
+            'product_id' =>$product->id,
+            'user_id' => Auth::user()->id,
+            'status_id' =>1,
+            'quantity' => 1,
+            'price' => $product->price,
+            'descount' => $product->promotion,
+            'payment_id' =>1,
+        ]);
+            session()->flash('success','Addicionado na carrinha com sucesso');
+             return redirect()->route('carts');
+              
+        } catch (\Throwable $th) {
+            session()->flash('error','Erro ao adicionar a carrinha');
+             return redirect()->route('carts');
+        }
     }
 
     /**
@@ -51,6 +76,10 @@ class CartController extends Controller
     {
         
     }
+    public function getCarts()
+    {
+        return Cart::with(['user','product','payment','status'])->where('user_id',Auth::user()->id)->get();
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -83,6 +112,13 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        try{
+             $cart->delete();
+              session()->flash('success','Deletado da carrinha com sucesso');
+             return redirect()->back();
+        }catch(\Throwable $th){
+            session()->flash('error','Erro ao deletar da carrinha');
+            return redirect()->back();
+        }
     }
 }

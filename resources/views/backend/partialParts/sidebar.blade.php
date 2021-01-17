@@ -38,6 +38,70 @@
                             <span>Favoritos</span>
                         </a>
                     </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-list"></i> 
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-th-list"></i> 
+                            <span>Sub Categories</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-image"></i> 
+                            <span>Post</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-tags"></i> 
+                            <span>Tags</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-car-side"></i> 
+                            <span>Fornecedores</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-users"></i> 
+                            <span>Users</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-money-bill"></i> 
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                     <li @if (\Route::current()->getName() == 'favorites' )
+                           class = " {{ __('active') }}"
+                        @endif>
+                        <a class="nav-link" href="{{ route('favorites') }}">
+                            <i class="fa fas fa-check-circle"></i> 
+                            <span>Status</span>
+                        </a>
+                    </li>
                 </ul> 
                 @break
             @case(2)

@@ -409,7 +409,7 @@
                 axios.delete('/oauth/clients/' + client.id)
                         .then(response => {
                             this.getClients();
-                        });
+                });
             }
         }
     }

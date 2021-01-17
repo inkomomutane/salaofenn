@@ -48,144 +48,151 @@ $(document).ready(function() {
 // jquery end
 </script>
 
-@stack('js')
+
 
 </head>
-<body>
-<header class="section-header">
-<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
-  <div class="container">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<body >
+	<div id="app">
+		<header class="section-header">
+		<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample07">
-      <ul class="navbar-nav mr-auto">
-        <li><a href="http://www.facebook.com/fenn.mz" class="nav-link"> <i class="fab fa-facebook"></i> </a></li>
-		<li><a href="http://www.intagram.com/nelson_mutane" class="nav-link"> <i class="fab fa-instagram"></i> </a></li>
-		<li><a href="http://www.twitter" class="nav-link"> <i class="fab fa-twitter"></i> </a></li>
-      </ul>
-      <ul class="navbar-nav">
-		<li class="nav-item"><a href="#" class="nav-link" ><i class="fa fa-exclamation-circle"></i> Suporte & reporte </a></li>
-		<li class="nav-item active">
-			<a class="nav-link" href="tel: +258847607095"> <i class="fa fa-phone"></i> Contacte-nos : +258847607095 </a>
-		</li>
-      </ul> <!-- navbar-nav.// -->
-    </div> <!-- collapse.// -->
-  </div>
-</nav>
+			<div class="collapse navbar-collapse" id="navbarsExample07">
+			<ul class="navbar-nav mr-auto">
+				<li><a href="http://www.facebook.com/fenn.mz" class="nav-link"> <i class="fab fa-facebook"></i> </a></li>
+				<li><a href="http://www.intagram.com/nelson_mutane" class="nav-link"> <i class="fab fa-instagram"></i> </a></li>
+				<li><a href="http://www.twitter" class="nav-link"> <i class="fab fa-twitter"></i> </a></li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item"><a href="#" class="nav-link" ><i class="fa fa-exclamation-circle"></i> Suporte & reporte </a></li>
+				<li class="nav-item active">
+					<a class="nav-link" href="tel: +258847607095"> <i class="fa fa-phone"></i> Contacte-nos : +258847607095 </a>
+				</li>
+			</ul> <!-- navbar-nav.// -->
+			</div> <!-- collapse.// -->
+		</div>
+		</nav>
 
-<section class="header-main shadow-sm">
-	<div class="container">
-<div class="row align-items-center sticky-top">
-	<div class="col-lg-3 col-sm-4">
-	<a href="{{ url('/') }}" class="brand-wrap">
-		<img class="logo" src="{{ asset('images/logos1.jpg') }}">
-	</a> <!-- brand-wrap.// -->
-	</div>
-	<div class="col-lg-4 col-xl-5 col-sm-8">
-			<form action="#" class="search-wrap">
-				<div class="input-group w-100">
-				    <input type="text" class="form-control" style="width:55%;" placeholder="Search">
-				    <div class="input-group-append">
-				      <button class="btn btn-primary" type="submit">
-				        <i class="fa fa-search"></i>
-				      </button>
-				    </div>
-			    </div>
-			</form> <!-- search-wrap .end// -->
-	</div> <!-- col.// -->
-		<div class="col-lg-3 col-sm-6 justify-content-end">
-		<div class="widgets-wrap d-flex justify-content-end">
-			<div class="widget-header">
-				<a href="#" class="icontext">
-					<div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-shopping-cart"></i></div>
-					<div class="text-wrap">
-						<span>3 items</span>
-					</div>
-				</a>
-			</div> <!-- widget .// -->
-			<div class="widget-header dropdown">
-				<a href="#" class="icontext" data-toggle="dropdown" data-offset="20,10">
-					<div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-user"></i></div>
-					<div class="text-wrap">
-						<span>Meu Perfil <i class="fa fa-caret-down"></i></span>
-					</div>
-				</a>
-				<div class="dropdown-menu dropdown-menu-right">
-					 @if (Route::has('login'))
-							@auth
-								<li class="dropdown-item"><a href="{{ url('/home') }}" class="nav-link">{{ __('Home') }}</a></li>
-							@else
-								<li class="dropdown-item"><a href="{{ route('login') }}" class="nav-link">{{ __('Login') }}</a></li>
-								@if (Route::has('register'))
-									<li class="dropdown-item"><a href="{{ route('register') }}" class="nav-link">{{ __('Register') }}</a></li>
-								@endif
-							@endauth
-					@endif
-				</div> <!--  dropdown-menu .// -->
-			</div> <!-- widget  dropdown.// -->
-		</div>	<!-- widgets-wrap.// -->	
-	</div> <!-- col.// -->
-	</div> <!-- container.// -->
-</section> <!-- header-main .// -->
-</header> <!-- section-header.// -->
+		<section class="header-main shadow-sm">
+			<div class="container">
+		<div class="row align-items-center sticky-top">
+			<div class="col-lg-3 col-sm-4">
+			<a href="{{ url('/') }}" class="brand-wrap">
+				<img class="logo" src="{{ asset('images/logos1.jpg') }}">
+			</a> <!-- brand-wrap.// -->
+			</div>
+			<div class="col-lg-4 col-xl-5 col-sm-8">
+					<form action="#" class="search-wrap">
+						<div class="input-group w-100">
+							<input type="text" class="form-control" style="width:55%;" placeholder="Search">
+							<div class="input-group-append">
+							<button class="btn btn-primary" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+							</div>
+						</div>
+					</form> <!-- search-wrap .end// -->
+			</div> <!-- col.// -->
+				<div class="col-lg-3 col-sm-6 justify-content-end">
+				<div class="widgets-wrap d-flex justify-content-end">
+					<div class="widget-header">
+						<a href="{{route('carts')}}" class="icontext">
+							<div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-shopping-cart"></i></div>
+							<div class="text-wrap">
+								@auth
+										<span>
+										{{
+											Auth::user()->carts->count()
+										}} items</span>
+									@else
+											<span>?</span>
+								@endauth
+							
+							</div>
+						</a>
+					</div> <!-- widget .// -->
+					<div class="widget-header dropdown">
+						<a href="#" class="icontext" data-toggle="dropdown" data-offset="20,10">
+							<div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-user"></i></div>
+							<div class="text-wrap">
+								<span>Meu Perfil <i class="fa fa-caret-down"></i></span>
+							</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							@if (Route::has('login'))
+									@auth
+										<li class="dropdown-item"><a href="{{ url('/home') }}" class="nav-link">{{ __('Home') }}</a></li>
+									@else
+										<li class="dropdown-item"><a href="{{ route('login') }}" class="nav-link">{{ __('Login') }}</a></li>
+										@if (Route::has('register'))
+											<li class="dropdown-item"><a href="{{ route('register') }}" class="nav-link">{{ __('Register') }}</a></li>
+										@endif
+									@endauth
+							@endif
+						</div> <!--  dropdown-menu .// -->
+					</div> <!-- widget  dropdown.// -->
+				</div>	<!-- widgets-wrap.// -->	
+			</div> <!-- col.// -->
+			</div> <!-- container.// -->
+		</section> <!-- header-main .// -->
+		</header> <!-- section-header.// -->
 
-@yield('content')
-
+	@yield('content')
+</div>
 
 <!-- ========================= SECTION FEATURES 2 ========================= -->
 <section class="section-features padding-y">
 	<div class="container">
-<div class="row">
-<div class="col-md-3 my-2">
-	<article class="box h-100 bg">
-		<figure class="itembox text-center">
-			<span class="icon-wrap rounded white icon-sm bg-warning"><i class="fa fa-box"></i></span>
-			<figcaption class="text-wrap">
-			<h5 class="title">50+ Components</h5>
-			<p class="text-muted">Many components ready to use. Well arranged sass files.</p>
-			</figcaption>
-		</figure> <!-- iconbox // -->
-	</article> <!-- panel-lg.// -->
-</div><!-- col // -->
-<div class="col-md-3 mb15  my-2">
-	<article class="box h-100 bg">
-		<figure class="itembox text-center">
-			<span class="icon-wrap white rounded icon-sm bg-primary"><i class="fa fa-code"></i>	</span>
-			<figcaption class="text-wrap">
-			<h5 class="title">Semantic code</h5>
-			<p class="text-muted">Meaningful class names and less div's. Easy to customize</p>
-			</figcaption>
-		</figure> <!-- iconbox // -->
-	</article> <!-- panel-lg.// -->
-</div> <!-- col // -->
-<div class="col-md-3 mb15 my-2">
-	<article class="box h-100 bg">
-		<figure class="itembox text-center">
-			<span class="icon-wrap white rounded icon-sm bg-success"><i class="fa fa-plug"></i>	</span>
-			<figcaption class="text-wrap">
-			<h5 class="title">Hand picked plugins</h5>
-			<p class="text-muted">Most used popular plugins are included and ready to use</p>
-			</figcaption>
-		</figure> <!-- iconbox // -->
-	</article> <!-- panel-lg.// -->
-</div> <!-- col // -->
-<div class="col-md-3 mb15 my-2">
-	<article class="box h-100 bg">
-		<figure class="itembox text-center">
-			<span class="icon-wrap white rounded icon-sm bg-secondary"><i class="fa fa-image"></i>	</span>
-			<figcaption class="text-wrap">
-			<h5 class="title">Sample assets</h5>
-			<p class="text-muted">Get ready to use html templates with image assets </p>
-			</figcaption>
-		</figure> <!-- iconbox // -->
-	</article> <!-- panel-lg.// -->
-</div> <!-- col // -->
-</div> <!-- row.// -->
-
-
-	</div> <!-- container.// -->
+		<div class="row">
+		<div class="col-md-3 my-2">
+			<article class="box h-100 bg">
+				<figure class="itembox text-center">
+					<span class="icon-wrap rounded white icon-sm bg-warning"><i class="fa fa-box"></i></span>
+					<figcaption class="text-wrap">
+					<h5 class="title">50+ Components</h5>
+					<p class="text-muted">Many components ready to use. Well arranged sass files.</p>
+					</figcaption>
+				</figure> <!-- iconbox // -->
+			</article> <!-- panel-lg.// -->
+		</div><!-- col // -->
+		<div class="col-md-3 mb15  my-2">
+			<article class="box h-100 bg">
+				<figure class="itembox text-center">
+					<span class="icon-wrap white rounded icon-sm bg-primary"><i class="fa fa-code"></i>	</span>
+					<figcaption class="text-wrap">
+					<h5 class="title">Semantic code</h5>
+					<p class="text-muted">Meaningful class names and less div's. Easy to customize</p>
+					</figcaption>
+				</figure> <!-- iconbox // -->
+			</article> <!-- panel-lg.// -->
+		</div> <!-- col // -->
+		<div class="col-md-3 mb15 my-2">
+			<article class="box h-100 bg">
+				<figure class="itembox text-center">
+					<span class="icon-wrap white rounded icon-sm bg-success"><i class="fa fa-plug"></i>	</span>
+					<figcaption class="text-wrap">
+					<h5 class="title">Hand picked plugins</h5>
+					<p class="text-muted">Most used popular plugins are included and ready to use</p>
+					</figcaption>
+				</figure> <!-- iconbox // -->
+			</article> <!-- panel-lg.// -->
+		</div> <!-- col // -->
+		<div class="col-md-3 mb15 my-2">
+			<article class="box h-100 bg">
+				<figure class="itembox text-center">
+					<span class="icon-wrap white rounded icon-sm bg-secondary"><i class="fa fa-image"></i>	</span>
+					<figcaption class="text-wrap">
+					<h5 class="title">Sample assets</h5>
+					<p class="text-muted">Get ready to use html templates with image assets </p>
+					</figcaption>
+				</figure> <!-- iconbox // -->
+			</article> <!-- panel-lg.// -->
+		</div> <!-- col // -->
+		</div> <!-- row.// -->
+	</div>
 </section>
 <!-- ========================= SECTION FEATURES 2 END// ========================= -->
 
@@ -246,6 +253,7 @@ $(document).ready(function() {
 		</section> <!-- //footer-top -->
 	</div><!-- //container -->
 </footer>
+@stack('js')
 <!-- ========================= FOOTER END // ========================= -->
 </body>
 </html>

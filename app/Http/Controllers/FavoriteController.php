@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
@@ -87,6 +88,16 @@ class FavoriteController extends Controller
     {
         $user->favorites()->detach($product->id);
         session()->flash('success','Produto ou servico removido dos favoritos');
+        return redirect()->back();
+    }
+
+    public function add(Product $product)
+    {
+    
+        if(count($product->users()->wherePivot('user_id',Auth::user()->id)->get()) == 0){
+            $product->users()->attach(Auth::user()->id);
+            return redirect()->back();
+        }
         return redirect()->back();
     }
 }
