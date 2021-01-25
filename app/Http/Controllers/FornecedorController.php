@@ -26,7 +26,7 @@ class FornecedorController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.dashboard.fornecedor')->with('fornecedors', Fornecedor::all());
     }
 
     /**
@@ -37,13 +37,17 @@ class FornecedorController extends Controller
      */
     public function store(CreateFornecedor $createFornecedorRequest)
     {
-         try {
-                $created = Fornecedor::updateOrCreate(
-                    $createFornecedorRequest->all()
-                );
-          return response()->json(['Fornecedor'=>$created,'message'=>'Fornecedor inserted successful','status'=>201],201);
+        try {
+            $created = Fornecedor::Create(
+                $createFornecedorRequest->all()
+            );
+            session()->flash('success', 'Fornecedor inserted successful');
+            return redirect()->back();
+            //  return response()->json(['Fornecedor'=>$created,'message'=>'Fornecedor inserted successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>$th],404);
+            session()->flash('error', 'Error inserting Fornecedor');
+            return redirect()->back();
+            //   return response()->json(['error'=>$th],404);
         }
     }
 
@@ -55,7 +59,7 @@ class FornecedorController extends Controller
      */
     public function show(Fornecedor $fornecedor)
     {
-        return  $fornecedor->with('products')->where('id',$fornecedor->id)->first();
+        return  $fornecedor->with('products')->where('id', $fornecedor->id)->first();
     }
 
     /**
@@ -78,11 +82,16 @@ class FornecedorController extends Controller
      */
     public function update(UpdateFornecedor $updateFornecedorRequest, Fornecedor $fornecedor)
     {
-         try {
+        try {
             $fornecedor->update($updateFornecedorRequest->all());
-                 return response()->json(['Fornecedor'=>$fornecedor,'message'=>'Fornecedor updated successful','status'=>201],201);
+            session()->flash('success', 'Fornecedor updated successful');
+            return redirect()->back();
+            //  return response()->json(['Fornecedor'=>$fornecedor,'message'=>'Fornecedor updated successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+
+            session()->flash('error', 'Error updating Fornecedor');
+            return redirect()->back();
+            //return response()->json(['error'=>'Error on updating data. Please try again.'],404);
         }
     }
 
@@ -95,10 +104,16 @@ class FornecedorController extends Controller
     public function destroy(Fornecedor $fornecedor)
     {
         try {
-             $fornecedor->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+            $fornecedor->delete();
+
+            session()->flash('success', 'Fornecedor deleted successful');
+            return redirect()->back();
+
+            //   return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+            session()->flash('erro', 'Error deleting Fornecedor');
+            return redirect()->back();
+            // return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }
     }
 }

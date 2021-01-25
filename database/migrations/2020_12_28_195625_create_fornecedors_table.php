@@ -17,7 +17,7 @@ class CreateFornecedorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('contact');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

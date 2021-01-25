@@ -26,7 +26,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-         
+         return view('backend.dashboard.status')->with('statuses',Status::all());
     }
 
     /**
@@ -38,12 +38,17 @@ class StatusController extends Controller
     public function store(CreateStatus $createStatusRequest)
     {
          try {
-                $created = Status::updateOrCreate(
+                $created = Status::Create(
                     $createStatusRequest->all()
                 );
-          return response()->json(['Status'=>$created,'message'=>'Status inserted successful','status'=>201],201);
+                
+                session()->flash('success','Status inserted successful');
+          return redirect()->back();
+          //return response()->json(['Status'=>$created,'message'=>'Status inserted successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>$th],404);
+           // return response()->json(['error'=>$th],404);
+            session()->flash('error','Error inserting status');
+          return redirect()->back();
         }
     }
 
@@ -80,9 +85,14 @@ class StatusController extends Controller
     {
         try {
             $status->update($updateStatusRequest->all());
-                 return response()->json(['Status'=>$status,'message'=>'Status updated successful','status'=>201],201);
+             session()->flash('success','Status updated successful');
+          return redirect()->back();
+               //  return response()->json(['Status'=>$status,'message'=>'Status updated successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+            
+                session()->flash('error','Error updating status');
+          return redirect()->back();
+            //return response()->json(['error'=>'Error on updating data. Please try again.'],404);
         }
     }
 
@@ -96,9 +106,15 @@ class StatusController extends Controller
     {
         try {
              $status->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+             
+             session()->flash('success','Status deleted successful');
+          return redirect()->back();
+            // return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+            
+            session()->flash('erro','Error deleting status');
+          return redirect()->back();
+              //return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }
     }
 }

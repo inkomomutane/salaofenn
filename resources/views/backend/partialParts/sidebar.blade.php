@@ -70,10 +70,10 @@
                             <span>Tags</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'fornecedor.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('fornecedor.create') }}">
                             <i class="fa fas fa-car-side"></i> 
                             <span>Fornecedores</span>
                         </a>
@@ -86,18 +86,18 @@
                             <span>Users</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'payment.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('payment.create') }}">
                             <i class="fa fas fa-money-bill"></i> 
                             <span>Payments</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'status.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('status.create') }}">
                             <i class="fa fas fa-check-circle"></i> 
                             <span>Status</span>
                         </a>
