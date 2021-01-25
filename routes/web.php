@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     //category route
          Route::resource('category', 'CategoryController');
     //subcategory route
-        Route::resource('subcategory', 'SubCategoryController');
+        Route::resource('subcategory','SubCategoryController');
     //fornecedores
         Route::resource('fornecedor', 'FornecedorController');        
     //post route

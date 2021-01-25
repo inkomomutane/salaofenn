@@ -367,15 +367,14 @@
                     @endif
                     @if (session('error'))
                         <div class="alert alert-danger alert-dismissible show fade  shadow-sm" role="alert">
-                            
                             <div class="alert-body">
-                                            <button class="close" data-dismiss="alert"><span>&times;</span></button>
-                                            {{ session('error') }}
-                                        </div>
+                                <button class="close" data-dismiss="alert"><span>&times;</span></button>
+                                    {{ session('error') }}
+                            </div>
                         </div>
                     @endif
                 </div>
-                @yield('content')
+                 @yield('content')
             </section>
         </div>
     </div>
@@ -383,6 +382,7 @@
 
 
 <!-- General JS Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('dashboard/assets/bundles/lib.vendor.bundle.js') }}"></script>
 <script src="{{ asset('dashboard/js/CodiePie.js') }}"></script>
 

@@ -26,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.dashboard.tag')->with('tags',Tag::all());
     }
 
     /**
@@ -38,12 +38,16 @@ class TagController extends Controller
     public function store(CreateTag $createTagRequest)
     {
         try {
-                $created = Tag::updateOrCreate(
+                $created = Tag::Create(
                     $createTagRequest->all()
                 );
-          return response()->json(['Tag'=>$created,'message'=>'Tag inserted successful','status'=>201],201);
+                session()->flash('success','Tag inserted successful');
+          return redirect()->back();
+         // return response()->json(['Tag'=>$created,'message'=>'Tag inserted successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>$th],404);
+            //return response()->json(['error'=>$th],404);
+            session()->flash('error','Error inserting Tag');
+          return redirect()->back();
         }
     }
     
@@ -81,9 +85,13 @@ class TagController extends Controller
     {
         try {
             $tag->update($updateTagRequest->all());
-                 return response()->json(['Tag'=>$tag,'message'=>'Tag updated successful','status'=>201],201);
+            session()->flash('success','Tag updated successful');
+          return redirect()->back();
+                /// return response()->json(['Tag'=>$tag,'message'=>'Tag updated successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+           // return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+              session()->flash('error','Error updating Tag');
+          return redirect()->back();
         }
     }
 
@@ -97,9 +105,13 @@ class TagController extends Controller
     {
          try {
              $tag->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+                session()->flash('success','Tag deleted successful');
+          return redirect()->back();
+              //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+               session()->flash('erro','Error deleting Tag');
+          return redirect()->back();
+              //return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }
     }
 }

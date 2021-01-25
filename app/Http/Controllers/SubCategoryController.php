@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\SubCategory\CreateSubCategory;
 use App\Http\Requests\SubCategory\UpdateSubCategory;
 use App\SubCategory;
+
+//use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Validator;
 
 class SubCategoryController extends Controller
 {
@@ -15,7 +17,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        return SubCategory::with(['category','products','services'])->get();
+        return SubCategory::all();
     }
 
     /**
@@ -25,45 +27,47 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.dashboard.subCategory')->with('subCategories',SubCategory::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\SubCategory\CreateSubCategory $createSubcategoryRequest
+     * @param  \App\Http\Requests\Category\CreateCategory $createCategoryRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateSubCategory $createSubcategoryRequest)
+    public function store(CreateSubCategory  $createCategoryRequest)
     {
-          try {
-                $created = SubCategory::updateOrCreate(
-                    $createSubcategoryRequest->all()
+        try {
+                $created = SubCategory::Create(
+                    $createCategoryRequest->all()
                 );
-          return response()->json(['SubCategory'=>$created,'message'=>'SubCategory inserted successful','status'=>201],201);
+                session()->flash('success','Sub - category inserted successful');
+          return redirect()->back();//json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
         } catch (\Throwable $th) {
-            return response()->json(['error'=>$th],404);
+            session()->flash('error','Error inserting sub - category');
+            return redirect()->back();//json(['error'=>$th],404);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(SubCategory $subCategory)
+    public function show(SubCategory $subcategory)
     {
-        return $subCategory->with(['category','products','services'])->where('id',$subCategory->id)->first();
+        return $subcategory->with('category')->where('id',$subcategory->id)->first();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubCategory $subCategory)
+    public function edit(SubCategory $subcategory)
     {
         //
     }
@@ -71,33 +75,46 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\SubCategory\UpdateSubCategory $updateSubCategoryRequest
-     * @param  \App\SubCategory  $subCategory
+     * @param \App\Http\Requests\Category\UpdateCategory $updateCategoryRequest
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSubCategory $updateSubCategoryRequest, SubCategory $subCategory)
+    public function update(UpdateSubCategory $updateCategoryRequest, SubCategory $subcategory)
     {
+        
         try {
-            $subCategory->update($updateSubCategoryRequest->all());
-                 return response()->json(['SubCategory'=>$subCategory,'message'=>'SubCategory updated successful','status'=>201],201);
+          //  dd($updateCategoryRequest->all());
+        $subcategory->update($updateCategoryRequest->all());
+             session()->flash('success','Category Updated successful');
+          return redirect()->back();
+           // return response()->json(['Category'=>$category,'message'=>'Category updated successful','status'=>201],201);
+ 
         } catch (\Throwable $th) {
-            return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+              session()->flash('error','Error Updating category');
+          return redirect()->back();
+                    //  return response()->json(['error'=>'Error on updating data. Please try again.'],404);
+ 
+            //throw $th;
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(SubCategory $subcategory)
     {
-         try {
-             $subCategory->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+        try {
+             $subcategory->delete();
+              session()->flash('success','Category deleted successful');
+          return redirect()->back();//json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
+              //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+            //  return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+             session()->flash('error','Error deleting category');
+            return redirect()->back();//json(['error'=>$th],404);
         }
     }
 }

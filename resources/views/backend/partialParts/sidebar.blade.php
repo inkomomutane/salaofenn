@@ -38,18 +38,18 @@
                             <span>Favoritos</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'category.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('category.create') }}">
                             <i class="fa fas fa-list"></i> 
                             <span>Categories</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'subcategory.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('subcategory.create') }}">
                             <i class="fa fas fa-th-list"></i> 
                             <span>Sub Categories</span>
                         </a>
@@ -62,10 +62,10 @@
                             <span>Post</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'tag.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('tag.create') }}">
                             <i class="fa fas fa-tags"></i> 
                             <span>Tags</span>
                         </a>
