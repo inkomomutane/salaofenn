@@ -3,6 +3,7 @@
     <link href="{{ asset('css/app.css') }}">
     <link href="'{{ asset('dashboard/datatables/dataTables.bootstrap4.css') }}'">
     <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/modules/jquery-selectric/selectric.css')}}">
 @endpush
 @section('content')
 
@@ -85,7 +86,7 @@
                 </div>
                 <div class="col-sm-12 py-2">
                     <label>Category</label>
-                    <select class="form-control custom-select" name="category_id">
+                    <select class="form-control custom-select selectric" name="category_id">
                         @foreach (\App\Category::all() as $cat)
                             <option value="{{ $cat->id }}"> {{ $cat->name }}
                             </option>
@@ -104,6 +105,7 @@
     </script>
     <script src="{{ asset('dashboard/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('dashboard/js/page/components-table.js') }}"></script>
+    
     <script>
         $('#modal-5').fireModal({
             title: 'New sub category',
@@ -158,7 +160,7 @@
                 </div>
                 <div class="col-sm-12 py-2">
                     <label>Category</label>
-                    <select class="form-control custom-select" name="category_id">
+                    <select class="form-control custom-select  selectric" name="category_id">
                         @foreach (\App\Category::all() as $cat)
                             <option value="{{ $cat->id }}"
                                  @if ($cat->id == $category->category_id)

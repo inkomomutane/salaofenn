@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     //status route
         Route::resource('status', 'StatusController');
     //user route
+        Route::resource('user', 'Auth\UserController');
     //role route
         Route::resource('role', 'RoleController');
         Route::get('/index','RoleController@Webindex');

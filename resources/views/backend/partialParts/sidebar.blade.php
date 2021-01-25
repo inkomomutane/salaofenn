@@ -78,10 +78,10 @@
                             <span>Fornecedores</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'user.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('user.create') }}">
                             <i class="fa fas fa-users"></i> 
                             <span>Users</span>
                         </a>
