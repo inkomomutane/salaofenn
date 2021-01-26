@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
         Route::resource('status', 'StatusController');
     //user route
         Route::resource('user', 'Auth\UserController');
+        Route::get('profile','Auth\UserController@profile')->name('user.profile');
     //role route
         Route::resource('role', 'RoleController');
         Route::get('/index','RoleController@Webindex');
