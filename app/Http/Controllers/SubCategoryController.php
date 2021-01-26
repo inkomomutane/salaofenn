@@ -85,12 +85,12 @@ class SubCategoryController extends Controller
         try {
           //  dd($updateCategoryRequest->all());
         $subcategory->update($updateCategoryRequest->all());
-             session()->flash('success','Category Updated successful');
+             session()->flash('success','Sub- Category Updated successful');
           return redirect()->back();
            // return response()->json(['Category'=>$category,'message'=>'Category updated successful','status'=>201],201);
  
         } catch (\Throwable $th) {
-              session()->flash('error','Error Updating category');
+              session()->flash('error','Error Updating sub - category');
           return redirect()->back();
                     //  return response()->json(['error'=>'Error on updating data. Please try again.'],404);
  
@@ -107,13 +107,19 @@ class SubCategoryController extends Controller
     public function destroy(SubCategory $subcategory)
     {
         try {
-             $subcategory->delete();
-              session()->flash('success','Category deleted successful');
-          return redirect()->back();//json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
+            if($subcategory->products->count()<=0){
+                $subcategory->delete();
+                session()->flash('success','Sub - category deleted successful');
+                return redirect()->back();
+            }else{
+                session()->flash('error','Error cannot delete sub - category having products or services');
+                return redirect()->back();
+            }
+         //json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
               //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
             //  return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
-             session()->flash('error','Error deleting category');
+             session()->flash('error','Error deleting  sub - category');
             return redirect()->back();//json(['error'=>$th],404);
         }
     }

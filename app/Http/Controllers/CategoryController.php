@@ -105,14 +105,21 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        //dd($category->subcategories->count());
         try {
-             $category->delete();
-              session()->flash('success','Category deleted successful');
-          return redirect()->back();//json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
+            if($category->subcategories->count() <= 0){
+                $category->delete();
+                session()->flash('success','Category deleted successful');
+                return redirect()->back();  
+            }
+                session()->flash('error','Error Cannot delete category having subcategories');
+                return redirect()->back();
+            
+             //json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
               //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
             //  return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
-             session()->flash('error','Error deleting category');
+             session()->flash('error','Error {$th} deleting category'.$th);
             return redirect()->back();//json(['error'=>$th],404);
         }
     }

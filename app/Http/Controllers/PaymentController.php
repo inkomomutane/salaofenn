@@ -115,9 +115,14 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         try {
-             $payment->delete();
-             session()->flash('success','Payment deleted successful');
+            if($payment->orders->count() <=0 && $payment->carts->count()<=0){
+                $payment->delete();
+                session()->flash('success','payment deleted successful');
+                return redirect()->back();
+            }else{
+                session()->flash('error','Error cannot delete payment becouse is used in other process.');
           return redirect()->back();
+            }
               //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
             session()->flash('erro','Error deleting Payment');

@@ -38,7 +38,7 @@ class TagController extends Controller
     public function store(CreateTag $createTagRequest)
     {
         try {
-                $created = Tag::Create(
+             $created = Tag::Create(
                     $createTagRequest->all()
                 );
                 session()->flash('success','Tag inserted successful');
@@ -104,12 +104,17 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
          try {
-             $tag->delete();
-                session()->flash('success','Tag deleted successful');
-          return redirect()->back();
+             if($tag->products->count()<=0){
+                    $tag->delete();
+                    session()->flash('success','Tag deleted successful');
+                return redirect()->back();
+             }else{
+                 session()->flash('error','Error, cannot delete tag having products or services post\'s');
+                return redirect()->back();
+             }
               //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-               session()->flash('erro','Error deleting Tag');
+               session()->flash('error','Error deleting Tag');
           return redirect()->back();
               //return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }

@@ -382,7 +382,7 @@
                 <section class="section">
                     <div class="container">
                         @if (session('success'))
-                            <div class="alert alert-success alert-dismissible show fade shadow-sm" role="alert">
+                            <div class="alert alert-success btn-success alert-dismissible show fade shadow-sm" role="alert">
                                 <div class="alert-body">
                                     <button class="close" data-dismiss="alert"><span>&times;</span></button>
                                     {{ session('success') }}
@@ -390,7 +390,7 @@
                             </div>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible show fade  shadow-sm" role="alert">
+                            <div class="alert alert-danger btn-danger alert-dismissible show fade  shadow-sm" role="alert">
                                 <div class="alert-body">
                                     <button class="close" data-dismiss="alert"><span>&times;</span></button>
                                     {{ session('error') }}
@@ -398,18 +398,17 @@
                             </div>
                         @endif
                         @if ($errors->count()>0)
-                            <div class="alert alert-danger alert-dismissible show fade shadow-sm" role="alert">
+                            <div class="alert alert-danger  btn-danger alert-dismissible show fade shadow" role="alert">
                                 <div class="alert-body">
                                     <button class="close" data-dismiss="alert">
                                         <span>&times;</span>
                                     </button>
-                                    <ul style="text-decoration:none">
+                                   
                                         @foreach ($errors->toArray() as $error )
                                             @foreach ($error as $el)
-                                                <li>{{ $el }}</li>
+                                                <dd><b>{{ $el }}</b></dd>
                                             @endforeach
                                         @endforeach
-                                    </ul>
                                 </div>
                             </div>
 

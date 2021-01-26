@@ -105,14 +105,19 @@ class StatusController extends Controller
     public function destroy(Status $status)
     {
         try {
-             $status->delete();
-             
-             session()->flash('success','Status deleted successful');
+            if($status->orders->count() <=0 && $status->carts->count()<=0){
+                $status->delete();
+                session()->flash('success','Status deleted successful');
+                return redirect()->back();
+            }else{
+                session()->flash('error','Error cannot delete status becouse is used in other process.');
           return redirect()->back();
+            }
+             
             // return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
             
-            session()->flash('erro','Error deleting status');
+            session()->flash('error','Error deleting status');
           return redirect()->back();
               //return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }

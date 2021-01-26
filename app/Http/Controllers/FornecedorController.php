@@ -104,14 +104,20 @@ class FornecedorController extends Controller
     public function destroy(Fornecedor $fornecedor)
     {
         try {
-            $fornecedor->delete();
+            if($fornecedor->products->count()<=0){
+                 $fornecedor->delete();
 
             session()->flash('success', 'Fornecedor deleted successful');
             return redirect()->back();
+            }else{
+            session()->flash('error', 'Error cannot delete fornecedor becouse is used in use in products.');
+            return redirect()->back();
+            }
+           
 
             //   return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-            session()->flash('erro', 'Error deleting Fornecedor');
+            session()->flash('error', 'Error deleting Fornecedor');
             return redirect()->back();
             // return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }

@@ -100,8 +100,13 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
          try {
-             $role->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+             if($role->users->count()<=0){
+                  $role->delete();
+                 return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+             }else{
+                   return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+             }  
+             
         } catch (\Throwable $th) {
               return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
         }
