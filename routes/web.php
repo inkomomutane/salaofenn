@@ -74,10 +74,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('backend.dashboard.buyLogs'); 
     })->name('buylogs');
     
-    Route::get('/agendar/{product}', function (Product $product) {
-        return "agendar ${product}";
-    })->name('agendar');
-    
+    Route::get('/agendar/{product}', 'AgendarController@create')->name('agendar');
+    Route::get('/agendar', 'AgendarController@store')->name('agendar.store');
+    Route::get('/agendar/{id}', 'AgendarController@update')->name('agendar.update');
+    Route::post('/agendar/delete/{id}', 'AgendarController@delete')->name('agendar.destroy');
 });
 
 

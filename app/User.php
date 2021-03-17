@@ -69,4 +69,13 @@ class User extends Authenticatable
             'product_id'
         )->using(ProductUserFavorite::class)->withTimestamps();
     }
+    public function agendas()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_user_agendas',
+            'user_id',
+            'product_id'
+        )->using(ProductUserAgenda::class)->withPivot('id','title', 'start_at','end_at')->withTimestamps();
+    }
 }

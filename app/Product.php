@@ -70,4 +70,15 @@ class Product extends Model
       )->using(ProductUserFavorite::class)->withTimestamps();
     }
 
+      public function agendas()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'product_user_agendas',
+            'product_id',
+            'user_id',
+        )->using(ProductUserAgenda::class)->withPivot('id','title', 'start_at','end_at')->withTimestamps();
+    }
+    
+
 }

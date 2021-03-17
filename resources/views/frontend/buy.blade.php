@@ -1,7 +1,6 @@
 @extends('layouts.frontendLayout')
 @section('content')
-<section class="section-pagetop bg-secondary">
-<div class="container clearfix">
+
 	<h2 class="title-page"><i class="fa fa-shopping-basket"></i> Comprar: <b class="alert alert-success">{{ $product->name }}</b></h2>
 
 	<nav class="float-left">

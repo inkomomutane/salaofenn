@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+
 import { VuejsDatatableFactory } from 'vuejs-datatable';
 
 window.Vue.use(VuejsDatatableFactory);
