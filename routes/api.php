@@ -25,5 +25,4 @@ Route::resource('order', 'OrderController')->middleware('auth:api');
 Route::resource('payment', 'PaymentController')->middleware('auth:api');
 Route::resource('product', 'ProductController')->middleware('auth:api');
 Route::resource('role', 'RoleController')->middleware('auth:api');
-Route::resource('service', 'ServiceController')->middleware('auth:api');
 Route::resource('status', 'StatusController')->middleware('auth:api');

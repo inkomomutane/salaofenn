@@ -121,4 +121,24 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
+     public function destroyId(Cart $cart)
+    {
+        try{
+            return $cart->delete();
+        }catch(\Throwable $th){
+            return $th;
+        }
+    }
+
+    public function freeze()
+    {
+
+        $carts = $this->getCarts();
+        if($carts !=null || $carts->count() >=0 ){
+            foreach ($carts as $cart) {
+                $this->destroyId($cart);
+            }
+        }
+        return 201;
+    }
 }

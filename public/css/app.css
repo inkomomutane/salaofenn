@@ -513,7 +513,7 @@ article:after,
 }
 
 .bg-pattern {
-  background-image: url(/images/bg-pattern.svg?6121232083996c53a92f60af62fff972), linear-gradient(135deg, #007bff, #0062cc);
+  background-image: url(/images/bg-pattern.svg?68466c7d48ad7f2227d2cf0011662016), linear-gradient(135deg, #007bff, #0062cc);
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
   background-position: 0px 0px, 50% 50%;

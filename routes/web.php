@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home', 'Dashboard\DashboardController@index')->name('home')->middleware(['auth']);
 
-Route::group(['middleware' => ['auth','admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     //category route
          Route::resource('category', 'CategoryController');
     //subcategory route
@@ -34,8 +34,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
     //fornecedores
         Route::resource('fornecedor', 'FornecedorController');        
     //post route
+        Route::resource('post', 'PostController');
         Route::resource('product', 'ProductController');
-        Route::resource('service', 'ServiceController');
     //favorites routes
         Route::get('favorites','FavoriteController@index')->name('favorites');
         Route::get('favorite/{product}/{user}','FavoriteController@destroy')->name('favorite_delete');
@@ -51,6 +51,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
         Route::get('/cart/{product}','CartController@add')->name('cart');
         Route::get('/getCarts','CartController@getCarts')->name('getCarts');
         Route::get('cart/remove/{cart}', 'CartController@destroy')->name('delete_cart');
+        Route::get('/cartx/freeze', 'CartController@freeze')->name('empty_cart');
+        
+
     //tag route
         Route::resource('tag', 'TagController');
     //payment route

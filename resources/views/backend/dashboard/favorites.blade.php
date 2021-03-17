@@ -37,7 +37,7 @@
                             <tr>
                             <td class="text-center"><i class="fas fa-th"></i></td>
                             <td>
-                                <img alt="image" src="http://www.salaofenn.co.mz/dashboard/assets/img/avatar/avatar-1.png {{-- $product->image --}}" class="rounded-circle" data-toggle="tooltip" title="" data-original-title=" {{ $product->name }}" width="35">
+                                <img alt="image" src=" {{ $product->image }}" class="" data-toggle="tooltip" title="" data-original-title=" {{ $product->name }}" width="35">
                                
                             </td>
                             <td>{{ $product->name }}</td>

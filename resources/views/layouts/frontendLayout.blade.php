@@ -201,47 +201,33 @@ $(document).ready(function() {
 	<div class="container">
 		<section class="footer-top padding-top">
 			<div class="row">
-				<aside class="col-sm-3 col-md-3 white">
-					<h5 class="title">Customer Services</h5>
+				<aside class="col-sm-3  col-md-3 white">
+					<h5 class="title">Minha conta</h5>
 					<ul class="list-unstyled">
-						<li> <a href="#">Help center</a></li>
-						<li> <a href="#">Money refund</a></li>
-						<li> <a href="#">Terms and Policy</a></li>
-						<li> <a href="#">Open dispute</a></li>
+						<li> <a href="{{ route('login') }}"> Login </a></li>
+						<li> <a href="{{ route('register') }}"> register </a></li>
+						<li> <a href="{{ route('user.profile') }}"> Meu Perfil </a></li>
+						<li> <a href="{{ route('order.cart') }}"> Carrinha </a></li>
+						<li> <a href="{{ route('favorites') }}"> favoritos </a></li>
 					</ul>
 				</aside>
-				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">My Account</h5>
-					<ul class="list-unstyled">
-						<li> <a href="#"> User Login </a></li>
-						<li> <a href="#"> User register </a></li>
-						<li> <a href="#"> Account Setting </a></li>
-						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="#"> My Wishlist </a></li>
-					</ul>
-				</aside>
-				<aside class="col-sm-3  col-md-3 white">
-					<h5 class="title">About</h5>
-					<ul class="list-unstyled">
-						<li> <a href="#"> Our history </a></li>
-						<li> <a href="#"> How to buy </a></li>
-						<li> <a href="#"> Delivery and payment </a></li>
-						<li> <a href="#"> Advertice </a></li>
-						<li> <a href="#"> Partnership </a></li>
+				<aside class="col-sm-6  col-md-6 white">
+					<h5 class="title">Localizacao</h5>
+					<ul class="list-unstyled bg-white" >
+						<iframe class="col-sm-12 shadow-sm" style="padding:0;margin:0; border:none !important"  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5009.793394958432!2d34.856202118514865!3d-19.83549253924872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2smz!4v1615929332490!5m2!1spt-BR!2smz"  style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 					</ul>
 				</aside>
 				<aside class="col-sm-3">
 					<article class="white">
-						<h5 class="title">Contacts</h5>
+						<h5 class="title">Contactos</h5>
 						<p>
-							<strong>Phone: </strong> +123456789 <br> 
-						    <strong>Fax:</strong> +123456789
+							<strong>Telefone: </strong> +258 84 502 3119 <br> 
 						</p>
 						 <div class="btn-group white">
-						    <a class="btn btn-facebook" title="Facebook" target="_blank" href="#"><i class="fab fa-facebook-f  fa-fw"></i></a>
-						    <a class="btn btn-instagram" title="Instagram" target="_blank" href="#"><i class="fab fa-instagram  fa-fw"></i></a>
-						    <a class="btn btn-youtube" title="Youtube" target="_blank" href="#"><i class="fab fa-youtube  fa-fw"></i></a>
-						    <a class="btn btn-twitter" title="Twitter" target="_blank" href="#"><i class="fab fa-twitter  fa-fw"></i></a>
+						    <a class="btn btn-facebook" title="Facebook" target="_blank" href="https://www.facebook.com/fenn.mz"><i class="fab fa-facebook-f  fa-fw"></i></a>
+						    <a class="btn btn-instagram" title="Instagram" target="_blank" href="https://www.instagram.com/fenn.mz"><i class="fab fa-instagram  fa-fw"></i></a>
+						    <a class="btn btn-youtube" title="Youtube" target="_blank" href="https://www.youtube.com/fenn.mz"><i class="fab fa-youtube  fa-fw"></i></a>
+						    <a class="btn btn-twitter" title="Twitter" target="_blank" href="https://www.twitter.com/fenn.mz"><i class="fab fa-twitter  fa-fw"></i></a>
 						</div>
 					</article>
 				</aside>

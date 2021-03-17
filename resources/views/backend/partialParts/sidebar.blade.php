@@ -54,10 +54,10 @@
                             <span>Sub Categories</span>
                         </a>
                     </li>
-                     <li @if (\Route::current()->getName() == 'favorites' )
+                     <li @if (\Route::current()->getName() == 'post.create' )
                            class = " {{ __('active') }}"
                         @endif>
-                        <a class="nav-link" href="{{ route('favorites') }}">
+                        <a class="nav-link" href="{{ route('post.create') }}">
                             <i class="fa fas fa-image"></i> 
                             <span>Post</span>
                         </a>

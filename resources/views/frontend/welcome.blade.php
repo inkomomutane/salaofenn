@@ -4,7 +4,7 @@
 
 <section class="section-pagetop bg-secondary">
 <div class="container clearfix">
-	<h2 class="title-page">Pagina</h2>
+	<h2 class="title-page">Bem vindo a Fenn's Look</h2>
 
 	<nav class="float-left">
 	<ol class="breadcrumb  bg-white px-3 py-1">
@@ -24,43 +24,40 @@
 <!-- ================= main slide ================= -->
 <div class="owl-init slider-main owl-carousel shadow" data-items="1" data-dots="false" data-nav="true">
 	<div class="item-slide">
-		<a href="images/banners/slide1.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide1.jpg"></a>
+		<a href="images/banners/salaofenn/1.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/salaofenn/1.jpg"></a>
 	</div>
-	<div class="item-slide rounded">	<a href="images/banners/slide2.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide2.jpg"></a>
+	<div class="item-slide rounded">	<a href="images/banners/salaofenn/2.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/salaofenn/2.jpg"></a>
 	
 	</div>
 	<div class="item-slide rounded">
-			<a href="images/banners/slide3.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/slide3.jpg"></a>
+			<a href="images/banners/salaofenn/3.jpg" data-fancybox="" class="item-gallery"><img src="images/banners/salaofenn/3.jpg"></a>
 	
 	</div>
 </div>
 <!-- ============== main slidesow .end // ============= -->
 
 	</div> <!-- col.// -->
-	<aside class="col-md-4">
-		@foreach ($categories->random(3) as $category )
-			<div class="card mb-3">
+	<aside class="col-md-4 p-2" >
+		@foreach (\App\Product::all()->random(3) as $product )
+		
+			<div class="card mb-3 p-2">
 			<figure class="itemside">
-				<div class="aside"><div class="img-wrap border-right"><img src="images/items/1.jpg"></div></div>
+				<div class="aside"><div class="img-wrap border-right"><img src="{{$product->image}}"></div></div>
 				<figcaption class="text-wrap align-self-center">
-					<h6 class="title">{{ $category->name }}</h6>
+					<h6 class="title">{{ $product->name }}</h6>
 					<dl class="dlist-align">
 						<dt>Categoria</dt>
 						<dd >
 							<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
-								<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" style="color:white">{{ $category->category->name }}</a></li>
+								<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)"><a href="#" onclick="$('#hashx{{ $product->subcategory->category->id}}').submit()" style="color:white">{{$product->subcategory->category->name }}</a></li>
 							</ol>
 						</dd>
 						</dl> 
 						 <!-- item-property-hor .// -->
-						 <form action="{{ route('filter') }}" method="POst" id="hashx{{ $category->id }}"> 
+						 <form action="{{ route('filter') }}" method="POst" id="hashx{{ $product->subcategory->category->id }}"> 
 						@csrf
-						<input type="hidden" name="subcategories[]" value="{{ $category->id }}">
-						<a href="#" onclick="$('#hashx{{ $category->id }}').submit()">
-							<li class="list-unstyled active_category">
-								Ver mais Itens
-							</li>
-						</a>
+						<input type="hidden" name="categories[]" value="{{$product->subcategory->category->id}}">
+						
 					</form>
 				</figcaption>
 			</figure>
@@ -153,20 +150,14 @@
 			<article class="card card-product">
 			<div class="card-body">
 			<div class="row">
-				<aside class="col-sm-3">
-					<div class="img-wrap"><img src="{{ $product->image }}"></div>
+				<aside class="col-sm-3" style="background-image: url('{{ $product->image }}');background-position-x: center;border-radius: 3px;padding: 0;margin: 0;">
+			
 				</aside> <!-- col.// -->
-				<article class="col-sm-6">
+				<article class="col-sm-5">
 						<h4 class="title"> {{ $product->name }}  </h4>
 						<p> {{ $product->short_description }}</p>
 						<dl class="dlist-align">
-						<dt>Categoria</dt>
-						<dd >
-							<ol class="breadcrumb  px-3 py-1" style="background:gray; ">
-								<li class="breadcrumb-item"><a href="#" style="color:white">{{ $product->subCategory->category->name }}</a></li>
-								<li class="breadcrumb-item active" aria-current="page" style="color: rgb(211, 210, 210)">{{ $product->subCategory->name }}</li>
-							</ol>
-						</dd>
+						
 						</dl>  <!-- item-property-hor .// -->
 						<dl class="dlist-align">
 						<dt>Publicacao: </dt>
@@ -186,46 +177,43 @@
 							<p>
 								<a href="{{ route('comprar',$product->id) }}" class="btn btn-success">
 									<i class="fa fa-money-bill-alt"></i>
-									Comprar agora
+									Comprar
 								</a>
-							</p>
-							<p>
 								<a href="{{ route('cart',$product->id) }}" class="btn btn-primary">
 									<i class="fa fa-shopping-cart"></i>
-									+ a Carrinha
+		
 								</a>
 							</p>
+							
 							<p>
 								<a href="{{ route('product_detail',$product->id) }}" class="btn btn-warning">
 									<i class="fa fa-eye"></i>
-									Ver detalhes
+									Detalhes
 								</a>
-							</p>
-							<p>
 								<a href="{{ route('favorite',$product->id) }}" class="btn btn-danger">
 									<i class="fa fa-heart"></i>
-									+ a Favoritos
+
 								</a>
 							</p>
+						
 							@else
 								<p>
 							<a href="{{ route('agendar',$product->id) }}" class="btn btn-success">
 								<i class="fa fa-clock "></i>
-								Agendar agora
+								Agendar
 							</a>
 						</p>
 						<p>
 							<a href="{{ route('product_detail',$product->id) }}" class="btn btn-warning">
 								<i class="fa fa-eye"></i>
-								 Ver detalhes
+								 Detalhes
 							</a>
-						</p>
-						<p>
 							<a href="{{ route('favorite',$product->id) }}" class="btn btn-danger">
 								<i class="fa fa-heart"></i>
-								+ a Favoritos
+							
 							</a>
 						</p>
+					
 							
 						@endif
 					</div> <!-- action-wrap.// -->

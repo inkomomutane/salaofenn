@@ -63,17 +63,40 @@
                         <dd class="text-right"><strong>MZN {{total}}</strong></dd>
                     </dl>
                     <hr>
-                    <input placeholder="Insira seu contacto M-pesa" class=" shadow-sm form-control  mb2 my-2" type ="text" v-model="contact" @input="acceptNumber"> 
-                    <button @click="submitForm" type="submit" class = "btn btn-danger" value=" Pagamento Via M-pesa">
+                    
+                    <button  type="button" class = "btn btn-danger" value=" Pagamento Via M-pesa" data-toggle="modal" data-target="#Mpesa">
                         <figure class="itemside">
                         <aside class=""><img :src=" baseurl+'/images/mpesa.jpg'"> Pagamento Via M-pesa</aside>
                     </figure>
                     </button>
-                    <button @click="submitForm" type="submit" class="btn btn-primary my-1 p2 shadow-sm" value=" Pagamento Visa Card">
-                        <figure class="itemside">
-                        <aside class=""><img :src=" baseurl+'/images/icons/pay-visa.png'"> Pagamento Via cartao <b>Visa</b></aside>
-                    </figure>
-                    </button>
+
+                        <!-- Modal -->
+<div class="modal fade" id="Mpesa" tabindex="-1" role="dialog" aria-labelledby="MpesaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="MpesaLabel">Efetuar Pagamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<div class="form-group">
+		  <label for="">Contacto</label>
+       <input placeholder="Insira seu contacto M-pesa" class=" shadow-sm form-control  mb2 my-2" type ="text" v-model="contact" @input="acceptNumber"> 
+		  <small id="helpId" class="text-muted">Contacto</small>
+		</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button @click="submitForm" type="submit" class="btn btn-success" id="send">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
                 </aside> <!-- col.// -->
             </div>
 
@@ -83,6 +106,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
     props: ['baseurl'],
     data() {
@@ -112,6 +136,9 @@ export default {
                  .then((res) => {
                      console.log(res);
                      if(res.data.status == 201){
+                         axios.get(this.baseurl + '/cartx/freeze').then((res)=>{
+                             window.location.href = this.baseurl + '/buylog';
+                         })
                          this.getCarts();
                      }else{
                          alert('Falha no pagamento');

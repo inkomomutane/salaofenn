@@ -169,11 +169,22 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        try {
-             $product->delete();
-              return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
+      try {
+            if($product->tags->count() <= 0 && $product->carts->count() <=0  && $product->users->count() <=0 ){
+                $product->delete();
+                session()->flash('success','Product deleted successful');
+                return redirect()->back();  
+            }
+                session()->flash('error','Error Cannot delete product because is in use.');
+                return redirect()->back();
+            
+             //json(['Category'=>$created,'message'=>'Category inserted successful','status'=>201],201);
+              //return response()->json(['message'=>'Data deleted Successful', 'status'=>201],201);
         } catch (\Throwable $th) {
-              return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+            //  return response()->json(['message'=>'Error on deleting data. Please try again.','status'=>404],404);
+             session()->flash('error','Error {$th} deleting product'.$th);
+            return redirect()->back();//json(['error'=>$th],404);
         }
+    
     }
 }

@@ -30,10 +30,9 @@
 <table class="table table-hover shopping-cart-wrap response">
 <thead class="text-muted">
 <tr>
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width = "300">Contact </th>
-  <th scope="col" width="120">Price</th>
+  <th scope="col">Produto</th>
+  <th scope="col" width="320">Quantidade</th>
+  <th scope="col" width="320">Preco</th>
 </tr>
 </thead>
 <tbody>
@@ -64,7 +63,7 @@
 		<input type="hidden" name="status_id" value="0">
 		
 	</td>
-	<td><input type="text" name = "contact" value="847607095" class="form-control"></td>
+	
 	<td> 
 		<div class="price-wrap"> 
 			<var class="price">MZN {{ $product->price }}</var> 
@@ -95,7 +94,35 @@
   <dd class="text-right"><strong>MZN  <t id="total"></t></strong></dd>
 </dl>
 <hr>
-<button type="submit" class = "btn btn-danger" value=" Pagamento Via M-pesa" id="send">
+
+
+<!-- Modal -->
+<div class="modal fade" id="Mpesa" tabindex="-1" role="dialog" aria-labelledby="MpesaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="MpesaLabel">Efetuar Pagamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<div class="form-group">
+		  <label for="">Contacto</label>
+        <input type="text" name = "contact" value="{{old('contact')}}" class="form-control" placeholder =  "Ex: 847607095">
+		  <small id="helpId" class="text-muted">Contacto</small>
+		</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" id="send">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class = "btn btn-danger" value=" Pagamento Via M-pesa" data-toggle="modal" data-target="#Mpesa">
 <figure class="itemside">
 	<aside class=""><img src="{{ asset('images/mpesa.jpg') }}"> Pagamento Via M-pesa</aside>
 </figure>
@@ -106,6 +133,12 @@
 </div> <!-- container .//  -->
  </form>
 </section>
+
+
+
+
+
+
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <script>
