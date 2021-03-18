@@ -83,7 +83,7 @@ class OrderController extends Controller
                         )
                     ),
                     'maded_by'=> Auth::user()->name,
-                    'status_id'=> $order['status']['id'],
+                    'status_id'=> 1,
                     'user_id' => Auth::user()->id,
                     'payment_id' =>$order['payment_id']
                 ];

@@ -42,7 +42,9 @@
                                 @if ($order->status!=null)
                                     {{ $order->status->name }}
                                     @else
-                                        Unknown
+                                        
+                                            completo
+                                        
                                 @endif
 
                                 
