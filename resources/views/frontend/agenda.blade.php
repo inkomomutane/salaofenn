@@ -45,7 +45,7 @@
                 selectMirror: true,
                 locale: 'pt',
                 select: function(arg) {
-
+                    alert(arg.start);
                 },
                 eventClick: function(arg) {
                     console.log(arg.event.id);
@@ -84,7 +84,6 @@
                 @foreach ($agendas as $agenda )
                     @if (count($agenda->agendas) > 0)
                         @foreach ( $agenda->agendas  as $ev )
-                        
                          {
                             id:'{{ $ev->pivot->user_id }}',
                             title: '{{ $ev->pivot->title }}',
@@ -92,7 +91,7 @@
                             end:new Date('{{ $ev->pivot->start_at }}'),
                             color: '#F30101',
                             editable: false
-                        }
+                        },
                     @endforeach
                 @endif
             @endforeach
