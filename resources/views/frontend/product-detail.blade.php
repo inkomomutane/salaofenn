@@ -84,7 +84,7 @@
 <article class="card mt-3">
 	<div class="card-body">
 		<h4>Descrição mais detalhada</h4>
-	<p>{{ $product->description }}</p>
+	<p><pre>{{ $product->description }}</pre></p>
 	</div> <!-- card-body.// -->
 </article> <!-- card.// -->
 
