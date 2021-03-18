@@ -237,8 +237,8 @@ $(document).ready(function() {
 				<aside class="col-sm-6  col-md-6 white">
 					<h5 class="title">Localizacao</h5>
 					<ul class="list-unstyled bg-white" >
-						<iframe class="col-sm-12 shadow-sm" style="padding:0;margin:0; border:none !important"  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5009.793394958432!2d34.856202118514865!3d-19.83549253924872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2smz!4v1615929332490!5m2!1spt-BR!2smz"  style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					</ul>
+						<iframe class="col-sm-12 shadow-sm" style="padding:0;margin:0; border:none !important" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.25732718562!2d34.83713131449111!3d-19.829061986660342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDQ5JzQ0LjYiUyAzNMKwNTAnMjEuNiJF!5e0!3m2!1spt-PT!2smz!4v1616058827062!5m2!1spt-PT!2smz" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+							</ul>
 				</aside>
 				<aside class="col-sm-3">
 					<article class="white">
