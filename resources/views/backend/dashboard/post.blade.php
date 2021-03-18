@@ -92,6 +92,7 @@
         @csrf
         <input type="text" class="form-control" name="name" required value="{{ old('name') }}" placeholder="Create Category"
             style="background:rgb(226, 226, 226)">
+            
     </form>
 </div>
 

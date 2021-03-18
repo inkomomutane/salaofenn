@@ -150,7 +150,7 @@
 			<article class="card card-product">
 			<div class="card-body">
 			<div class="row">
-				<aside class="col-sm-3" style="background-image: url('{{ $product->image }}');background-position-x: center;border-radius: 3px;padding: 0;margin: 0;">
+				<aside class="col-sm-3" style="background-image: url('{{ $product->image }}');background-position-x: center;border-radius: 3px;padding: 0;margin: 0;background-size: contain;background-repeat: no-repeat">
 			
 				</aside> <!-- col.// -->
 				<article class="col-sm-5">
