@@ -34,7 +34,14 @@
 
 <!-- custom javascript -->
 <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
-
+<style>
+	.card>img{
+		height: 180px;
+		width: 180px;
+		box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.281) !important;
+		border-radius: 3px
+	}
+</style>
 @stack('css')
 
 <script type="text/javascript">
@@ -147,50 +154,66 @@ $(document).ready(function() {
 <section class="section-features padding-y">
 	<div class="container">
 		<div class="row">
-		<div class="col-md-3 my-2">
-			<article class="box h-100 bg">
-				<figure class="itembox text-center">
-					<span class="icon-wrap rounded white icon-sm bg-warning"><i class="fa fa-box"></i></span>
-					<figcaption class="text-wrap">
-					<h5 class="title">50+ Components</h5>
-					<p class="text-muted">Many components ready to use. Well arranged sass files.</p>
-					</figcaption>
-				</figure> <!-- iconbox // -->
-			</article> <!-- panel-lg.// -->
-		</div><!-- col // -->
-		<div class="col-md-3 mb15  my-2">
-			<article class="box h-100 bg">
-				<figure class="itembox text-center">
-					<span class="icon-wrap white rounded icon-sm bg-primary"><i class="fa fa-code"></i>	</span>
-					<figcaption class="text-wrap">
-					<h5 class="title">Semantic code</h5>
-					<p class="text-muted">Meaningful class names and less div's. Easy to customize</p>
-					</figcaption>
-				</figure> <!-- iconbox // -->
-			</article> <!-- panel-lg.// -->
-		</div> <!-- col // -->
-		<div class="col-md-3 mb15 my-2">
-			<article class="box h-100 bg">
-				<figure class="itembox text-center">
-					<span class="icon-wrap white rounded icon-sm bg-success"><i class="fa fa-plug"></i>	</span>
-					<figcaption class="text-wrap">
-					<h5 class="title">Hand picked plugins</h5>
-					<p class="text-muted">Most used popular plugins are included and ready to use</p>
-					</figcaption>
-				</figure> <!-- iconbox // -->
-			</article> <!-- panel-lg.// -->
-		</div> <!-- col // -->
-		<div class="col-md-3 mb15 my-2">
-			<article class="box h-100 bg">
-				<figure class="itembox text-center">
-					<span class="icon-wrap white rounded icon-sm bg-secondary"><i class="fa fa-image"></i>	</span>
-					<figcaption class="text-wrap">
-					<h5 class="title">Sample assets</h5>
-					<p class="text-muted">Get ready to use html templates with image assets </p>
-					</figcaption>
-				</figure> <!-- iconbox // -->
-			</article> <!-- panel-lg.// -->
-		</div> <!-- col // -->
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h1.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h2.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h3.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h4.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h5.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="card">
+					<img src="{{ asset('/images/posts/h6.jpg') }}" alt="" srcset="">
+					
+					<div class="card-body">
+						<h6 class="card-title">
+						Euria Marcos</h6>
+					</div>
+				</div>
+			</div>
 		</div> <!-- row.// -->
 	</div>
 </section>
